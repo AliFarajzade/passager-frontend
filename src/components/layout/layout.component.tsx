@@ -1,4 +1,4 @@
-import AuthModal from '../modal/auth.modal'
+import AuthModal from '../modal/auth-modal.component'
 import Navbar from '../navbar/navbar.component'
 
 type IProps = {

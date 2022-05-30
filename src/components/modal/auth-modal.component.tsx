@@ -4,7 +4,7 @@ const AuthModal: React.FC = () => {
         <>
             <input type="checkbox" id="my-modal-3" className="modal-toggle" />
             <div className="modal">
-                <div className="modal-box relative">
+                <div className="modal-box relative  max-w-md">
                     <label
                         htmlFor="my-modal-3"
                         className="btn btn-primary text-white btn-sm btn-circle absolute right-2 top-2"
