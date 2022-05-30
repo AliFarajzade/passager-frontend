@@ -9,12 +9,9 @@ const Navbar = () => {
     const handleChangeTheme = () =>
         setTheme(prevState => (prevState === 'emerald' ? 'dark' : 'emerald'))
 
+    // For changing the theme.
     useEffect(() => {
         themeChange(false)
-    }, [theme])
-
-    // For changing theme
-    useEffect(() => {
         document.documentElement.dataset.theme = theme
     }, [theme])
 
