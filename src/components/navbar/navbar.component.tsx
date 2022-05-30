@@ -34,8 +34,12 @@ const Navbar = () => {
             </div>
 
             <div className="navbar-end space-x-4">
-                <button className="btn btn-outline w-max">Sign In</button>
-                <button className="btn btn-primary w-max">Sign Up</button>
+                <label htmlFor="my-modal-3" className="btn btn-outline w-max">
+                    Sign In
+                </label>
+                <label htmlFor="my-modal-3" className="btn btn-primary w-max">
+                    Sign Up
+                </label>
 
                 <div className="flex gap-2">
                     <input
