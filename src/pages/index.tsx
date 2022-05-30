@@ -3,8 +3,10 @@ import HomeHero from '../components/home/home-hero.component'
 
 const Home: NextPage = () => {
     return (
-        <div className="p-8">
-            <HomeHero />
+        <div className="lg:p-8">
+            <div className="bg-gray-100">
+                <HomeHero />
+            </div>
         </div>
     )
 }
