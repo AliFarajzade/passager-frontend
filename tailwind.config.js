@@ -1,7 +1,12 @@
 module.exports = {
     content: ['./src/**/*.{js,ts,jsx,tsx}'],
     theme: {
-        extend: {},
+        extend: {
+            colors: {
+                lightGreenAlpha: '#7dd46e',
+                darkGreenAlpha: '#28b484',
+            },
+        },
         fontFamily: {
             sans: ['"Open Sans"', 'sans-serif'],
         },
