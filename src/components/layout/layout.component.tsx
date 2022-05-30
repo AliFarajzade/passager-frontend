@@ -1,3 +1,4 @@
+import AuthModal from '../modal/auth.modal'
 import Navbar from '../navbar/navbar.component'
 
 type IProps = {
@@ -8,6 +9,7 @@ const Layout: React.FC<IProps> = ({ children }) => (
     <div className="max-w-screen-2xlxl mx-auto">
         <Navbar />
         <main>{children}</main>
+        <AuthModal />
     </div>
 )
 
