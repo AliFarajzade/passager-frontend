@@ -34,12 +34,43 @@ const Navbar = () => {
             </div>
 
             <div className="navbar-end space-x-4">
-                <label htmlFor="my-modal-3" className="btn btn-outline w-max">
+                <label
+                    htmlFor="my-modal-3"
+                    className="btn btn-outline w-max hidden sm:flex"
+                >
                     Sign In
                 </label>
-                <label htmlFor="my-modal-3" className="btn btn-primary w-max">
+                <label
+                    htmlFor="my-modal-3"
+                    className="btn btn-primary w-max hidden sm:flex"
+                >
                     Sign Up
                 </label>
+
+                <div className="dropdown dropdown-end sm:hidden">
+                    <label tabIndex={0} className="btn btn-ghost m-1 mr-3">
+                        <svg
+                            className="fill-current"
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="20"
+                            height="20"
+                            viewBox="0 0 24 24"
+                        >
+                            <path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
+                        </svg>
+                    </label>
+                    <ul
+                        tabIndex={0}
+                        className="dropdown-content menu p-2 shadow rounded-box w-52 bg-slate-100 dark:bg-white"
+                    >
+                        <li>
+                            <label htmlFor="my-modal-3">Sign In</label>
+                        </li>
+                        <li>
+                            <label htmlFor="my-modal-3">Sign Up</label>
+                        </li>
+                    </ul>
+                </div>
 
                 <div className="flex gap-2">
                     <input
