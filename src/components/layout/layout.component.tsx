@@ -6,7 +6,7 @@ type IProps = {
 }
 
 const Layout: React.FC<IProps> = ({ children }) => (
-    <div className="max-w-screen-2xlxl mx-auto">
+    <div className="max-w-screen-2xl mx-auto">
         <Navbar />
         <main>{children}</main>
         <AuthModal />
