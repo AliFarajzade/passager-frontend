@@ -24,7 +24,7 @@ const cards = [
 const ToursInfo = () => {
     return (
         <section className="py-32 px-10">
-            <h1 className="text-center text-3xl md:text-4xl font-semibold tracking-wider bg-gradient-to-r from-lightGreen to-darkGreen bg-clip-text text-transparent hover:skew-y-2 hover:skew-x-12 hover:scale-110 transition-all text-shadow">
+            <h1 className="gradient-title">
                 EXCITING TOURS FOR ADVENTUROUS PEOPLE
             </h1>
             <div className="grid grid-cols-1  md:grid-cols-2 gap-5 pt-24">
