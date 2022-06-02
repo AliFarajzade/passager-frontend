@@ -2,3 +2,33 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.text-shadow:hover {
+    text-shadow: 0.5rem 1rem 2rem rgb(0 0 0 / 20%);
+}
+
+.pic {
+    width: 50%;
+
+    transition: transform 200ms ease-in-out;
+
+    &:hover {
+        z-index: 50;
+        transform: scale(1.1);
+        outline: solid 15px #7ed56f;
+        outline-offset: 1em;
+    }
+}
+
+.p--0 {
+    top: 0%;
+    left: 17%;
+}
+.p--1 {
+    top: 50px;
+    right: 0%;
+}
+.p--2 {
+    top: 124px;
+    left: 33%;
+}
