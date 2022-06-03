@@ -3,6 +3,21 @@
 @tailwind components;
 @tailwind utilities;
 
+// COLORS
+$color-primary-light: #7ed56f;
+$color-primary-dark: #28b485;
+
+$color-secondary-light: #ffb900;
+$color-secondary-dark: #ff7730;
+
+$color-tertiary-light: #2998ff;
+$color-tertiary-dark: #5643fa;
+
+$color-grey-light-2: #eee;
+
+$color-white: #fff;
+$color-black: #000;
+
 .text-shadow:hover {
     text-shadow: 0.5rem 1rem 2rem rgb(0 0 0 / 20%);
 }
@@ -31,4 +46,158 @@
 .p--2 {
     top: 124px;
     left: 33%;
+}
+
+@layer components {
+    .gradient-title {
+        @apply uppercase text-center text-3xl md:text-4xl font-semibold tracking-wider bg-gradient-to-r from-lightGreen to-darkGreen bg-clip-text text-transparent hover:skew-y-2 hover:skew-x-12 hover:scale-110 transition-all text-shadow;
+    }
+}
+
+.card {
+    cursor: pointer;
+    perspective: 1500px;
+    position: relative;
+    width: 100%;
+    height: 520px;
+    border-radius: 3px;
+    overflow: hidden;
+
+    &__image {
+        background-blend-mode: screen;
+        clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+        &--1 {
+            background-image: linear-gradient(
+                    to bottom right,
+                    $color-secondary-light,
+                    $color-secondary-dark
+                ),
+                url('/images/nat-5.jpg');
+        }
+        &--2 {
+            background-image: linear-gradient(
+                    to bottom right,
+
+                    $color-primary-light,
+                    $color-primary-dark
+                ),
+                url('/images/nat-6.jpg');
+        }
+        &--3 {
+            background-image: linear-gradient(
+                    to bottom right,
+                    $color-tertiary-light,
+                    $color-tertiary-dark
+                ),
+                url('/images/nat-7.jpg');
+        }
+    }
+
+    &__heading {
+        color: white;
+        font-weight: 300;
+        text-transform: uppercase;
+        text-align: center;
+        position: absolute;
+        left: 50%;
+        top: 116px;
+        width: 60%;
+        font-size: 0.9em;
+        transform: translateX(-50%);
+
+        @media (min-width: 1280px) {
+            text-align: right;
+            left: unset;
+            right: 9px;
+            transform: unset;
+        }
+    }
+
+    &__mobile-price {
+        position: absolute;
+        background-color: red;
+        height: 250px;
+        top: 100%;
+        clip-path: polygon(0 20%, 100% 0, 100% 100%, 0 100%);
+    }
+
+    &__heading-span {
+        padding: 10px;
+        box-decoration-break: clone;
+
+        &--1 {
+            background-image: linear-gradient(
+                to bottom right,
+                $color-secondary-light,
+                $color-secondary-dark
+            );
+        }
+
+        &--2 {
+            background-image: linear-gradient(
+                to bottom right,
+
+                $color-primary-light,
+                $color-primary-dark
+            );
+        }
+        &--3 {
+            background-image: linear-gradient(
+                to bottom right,
+                $color-tertiary-light,
+                $color-tertiary-dark
+            );
+        }
+    }
+
+    &__side {
+        color: white;
+        font-size: 2em;
+        height: 520px;
+        position: absolute;
+        width: 100%;
+        backface-visibility: hidden;
+
+        transition: transform 750ms ease;
+
+        &--front {
+            background-color: white;
+        }
+        &--back {
+            transform: rotateY(-180deg);
+
+            &-1 {
+                background-image: linear-gradient(
+                    to bottom right,
+                    $color-secondary-light,
+                    $color-secondary-dark
+                );
+            }
+            &-2 {
+                background-image: linear-gradient(
+                    to bottom right,
+                    $color-primary-light,
+                    $color-primary-dark
+                );
+            }
+            &-3 {
+                background-image: linear-gradient(
+                    to bottom right,
+                    $color-tertiary-light,
+                    $color-tertiary-dark
+                );
+            }
+        }
+    }
+
+    @media (min-width: 1024px) {
+        cursor: default;
+
+        &:hover &__side--front {
+            transform: rotateY(180deg);
+        }
+        &:hover &__side--back {
+            transform: rotateY(0deg);
+        }
+    }
 }
