@@ -201,3 +201,48 @@ $color-black: #000;
         }
     }
 }
+
+.newsletter {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    gap: 2em;
+    background-position: center;
+    background-size: cover;
+    padding: 6em 3em;
+    background-image: linear-gradient(
+            105deg,
+            rgba(255, 255, 255, 0.9) 0%,
+            rgba(255, 255, 255, 0.9) 100%
+        ),
+        url('/images/nat-10.jpg');
+
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+
+    @media (min-width: 700px) {
+        text-align: left;
+        justify-content: center;
+        align-items: flex-start;
+
+        background-image: linear-gradient(
+                105deg,
+                rgba(255, 255, 255, 0.9) 0%,
+                rgba(255, 255, 255, 0.9) 65%,
+                rgba(0, 0, 0, 0) 65%
+            ),
+            url('/images/nat-10.jpg');
+    }
+
+    @media (min-width: 1024px) {
+        background-image: linear-gradient(
+                105deg,
+                rgba(255, 255, 255, 0.9) 0%,
+                rgba(255, 255, 255, 0.9) 50%,
+                rgba(0, 0, 0, 0) 50%
+            ),
+            url('/images/nat-10.jpg');
+    }
+}
