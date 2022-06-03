@@ -1,5 +1,6 @@
 import type { NextPage } from 'next'
 import HomeHero from '../components/home/hero/home-hero.component'
+import MostPopularTours from '../components/home/most-popular-tours/most-popular-tours.component'
 import TourFeatures from '../components/home/tour-features/tour-features.component'
 import ToursInfo from '../components/home/tours-info/tours-info.component'
 
@@ -11,6 +12,7 @@ const Home: NextPage = () => {
                 <main>
                     <ToursInfo />
                     <TourFeatures />
+                    <MostPopularTours />
                 </main>
             </div>
         </div>
