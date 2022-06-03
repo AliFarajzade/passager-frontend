@@ -6,25 +6,25 @@ const cardsData = [
         IconComponent: BiWorld,
         title: 'EXPLORE THE WORLD',
         descriptions:
-            'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam, ipsum sapiente aspernatur.',
+            'Forget not that the earth delights to feel your bare feet and the winds long to play with your hair.',
     },
     {
         IconComponent: BsCompass,
         title: 'MEET NATURE',
         descriptions:
-            'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam, ipsum sapiente aspernatur.',
+            'To me a lush carpet of pine needles or spongy grass is more welcome than the most luxurious Persian rug.',
     },
     {
         IconComponent: BsMap,
         title: 'FIND YOUR WAY',
         descriptions:
-            'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam, ipsum sapiente aspernatur.',
+            'Our experts will lead you all the way long and you will not feel strange at all. More than 250+ guides.',
     },
     {
         IconComponent: BiHeart,
         title: 'LIVE A HEALTHIER LIFE',
         descriptions:
-            'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam, ipsum sapiente aspernatur.',
+            'I go to nature to be soothed and healed, and to have my senses put in order.',
     },
 ]
 

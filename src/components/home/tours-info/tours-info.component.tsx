@@ -33,17 +33,19 @@ const ToursInfo = () => {
                         {/* TODO: Change paragraph <text className=""></text> */}
                         <h4>YOU&apos;RE GOING TO FALL IN LOVE WITH NATURE</h4>
                         <p>
-                            Lorem ipsum dolor sit amet consectetur, adipisicing
-                            elit. Magnam similique optio dolore obcaecati
-                            repudiandae dolorem qui ipsam tenetur culpa placeat!
+                            It is not so much for its beauty that the forest
+                            makes a claim upon men’s hearts, as for that subtle
+                            something, that quality of air that emanation from
+                            old trees, that so wonderfully changes and renews a
+                            weary spirit.
                         </p>
                     </div>
                     <div className="space-y-4 prose">
                         <h4>LIVE ADVENTURES LIKE YOU NEVER HAVE BEFORE</h4>
                         <p>
-                            Lorem ipsum dolor sit amet consectetur, adipisicing
-                            elit. Magnam similique optio dolore obcaecati
-                            repudiandae dolorem qui ipsam tenetur culpa placeat!
+                            Live in each season as it passes; breathe the air,
+                            drink the drink, taste the fruit, and resign
+                            yourself to the influence of the earth.
                         </p>
                     </div>
                     <button className="btn btn-ghost text-lightGreen hover:bg-lightGreenAlpha hover:text-white">
