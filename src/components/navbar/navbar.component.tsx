@@ -37,18 +37,18 @@ const Navbar = () => {
             </div>
 
             <div className="navbar-end space-x-4">
-                <label
+                <button
                     className="btn btn-outline w-max hidden sm:flex"
                     onClick={openAuthModalAsSignIn}
                 >
                     Sign In
-                </label>
-                <label
+                </button>
+                <button
                     className="btn btn-primary text-white w-max hidden sm:flex"
                     onClick={openAuthModalAsSignUp}
                 >
                     Sign Up
-                </label>
+                </button>
 
                 <div className="dropdown dropdown-end sm:hidden">
                     <label tabIndex={0} className="btn btn-ghost m-1 mr-3">
