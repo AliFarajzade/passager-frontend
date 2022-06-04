@@ -28,7 +28,15 @@ const Footer: React.FC = () => {
                             Ali Farajzade
                         </a>{' '}
                     </strong>
-                    &copy; Passager 2022
+                    &copy;{' '}
+                    <a
+                        href="https://github.com/AliFarajzade/passager-frontend"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="link link-primary"
+                    >
+                        Passager 2022
+                    </a>
                 </p>
             </div>
             <div>
