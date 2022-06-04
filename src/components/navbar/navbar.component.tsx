@@ -1,23 +1,9 @@
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
-import { BiMoon, BiSun } from 'react-icons/bi'
 import { useSetRecoilState } from 'recoil'
-import { themeChange } from 'theme-change'
 import authModalStateAtom from '../../recoil/atoms/auth-modal.atom'
 
 const Navbar = () => {
     const setAuthModalState = useSetRecoilState(authModalStateAtom)
-
-    const [theme, setTheme] = useState<'dark' | 'emerald'>('emerald')
-
-    const handleChangeTheme = () =>
-        setTheme(prevState => (prevState === 'emerald' ? 'dark' : 'emerald'))
-
-    // For changing the theme.
-    useEffect(() => {
-        themeChange(false)
-        document.documentElement.dataset.theme = theme
-    }, [theme])
 
     const openAuthModalAsSignIn = () =>
         setAuthModalState(prevState => ({
@@ -87,19 +73,6 @@ const Navbar = () => {
                             <label htmlFor="my-modal-3">Sign Up</label>
                         </li>
                     </ul>
-                </div>
-
-                <div className="flex gap-2">
-                    <input
-                        onChange={handleChangeTheme}
-                        type="checkbox"
-                        className="toggle"
-                    />
-                    {theme === 'emerald' ? (
-                        <BiSun size="1.5em" />
-                    ) : (
-                        <BiMoon size="1.5em" />
-                    )}
                 </div>
             </div>
         </div>
