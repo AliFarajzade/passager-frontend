@@ -250,3 +250,13 @@ html {
             url('/images/nat-10.jpg');
     }
 }
+
+.swiper-pagination-bullet {
+    opacity: 0.6 !important;
+    background-color: white !important;
+}
+
+span.swiper-pagination-bullet.swiper-pagination-bullet-active {
+    background-color: white !important;
+    opacity: 1 !important;
+}
