@@ -31,6 +31,7 @@ const cardsData = [
 const TourFeatures: React.FC = () => {
     return (
         <section
+            id="features"
             style={{
                 backgroundImage:
                     'linear-gradient(to bottom right,rgba(126,213,111,.8),rgba(40,180,133,.8)), url(/images/nat-4.jpg)',

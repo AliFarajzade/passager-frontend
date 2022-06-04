@@ -18,6 +18,10 @@ $color-grey-light-2: #eee;
 $color-white: #fff;
 $color-black: #000;
 
+html {
+    scroll-behavior: smooth;
+}
+
 .text-shadow:hover {
     text-shadow: 0.5rem 1rem 2rem rgb(0 0 0 / 20%);
 }
