@@ -37,6 +37,7 @@ const MostPopularToursCard: React.FC<IProps> = ({ cardData, index }) => {
             >
                 <span className="text-3xl tracking-wide font-light">ONLY</span>
                 <span className="font-light text-5xl">${cardData.price}</span>
+                {/* TODO: Add link */}
                 <button className="btn bg-white shadow-lg rounded-full text-slate-600 border-0 hover:bg-slate-200 ">
                     More details
                 </button>

@@ -48,6 +48,7 @@ const ToursInfo = () => {
                             yourself to the influence of the earth.
                         </p>
                     </div>
+                    {/* TODO: Add link */}
                     <button className="btn btn-ghost text-lightGreen hover:bg-lightGreenAlpha hover:text-white">
                         Explore Tours <span className="text-3xl">→</span>
                     </button>

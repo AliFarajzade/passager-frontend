@@ -6,6 +6,7 @@ import TourFeatures from '../components/home/tour-features/tour-features.compone
 import ToursInfo from '../components/home/tours-info/tours-info.component'
 
 const Home: NextPage = () => {
+    // TODO: Add sidebar
     return (
         <div className="lg:p-8 selection:bg-lightGreenAlpha selection:text-white">
             <div className="bg-gray-100">

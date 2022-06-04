@@ -13,6 +13,7 @@ const NewsLetter: React.FC = () => {
                     placeholder="Enter your email"
                     className="input w-full max-w-xs mb-10 input-bordered"
                 />
+                {/* TODO: Hook this up with API */}
                 <button className="btn btn-outline btn-primary">Submit</button>
             </div>
         </section>
