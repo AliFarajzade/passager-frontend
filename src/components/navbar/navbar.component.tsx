@@ -1,9 +1,13 @@
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { BiMoon, BiSun } from 'react-icons/bi'
+import { useSetRecoilState } from 'recoil'
 import { themeChange } from 'theme-change'
+import authModalStateAtom from '../../recoil/atoms/auth-modal.atom'
 
 const Navbar = () => {
+    const setAuthModalState = useSetRecoilState(authModalStateAtom)
+
     const [theme, setTheme] = useState<'dark' | 'emerald'>('emerald')
 
     const handleChangeTheme = () =>
@@ -15,7 +19,18 @@ const Navbar = () => {
         document.documentElement.dataset.theme = theme
     }, [theme])
 
-    console.log('Navbar')
+    const openAuthModalAsSignIn = () =>
+        setAuthModalState(prevState => ({
+            ...prevState,
+            open: true,
+            view: 'signIn',
+        }))
+    const openAuthModalAsSignUp = () =>
+        setAuthModalState(prevState => ({
+            ...prevState,
+            open: true,
+            view: 'signUp',
+        }))
 
     return (
         <div className="bg-base-100 border-b-2 navbar">
@@ -29,20 +44,22 @@ const Navbar = () => {
                 {/* TODO: Add links */}
                 <button className="btn btn-ghost">Tours</button>
                 <button className="btn btn-ghost">Guides</button>
-                <button className="btn btn-ghost">Features</button>
+                <a className="btn btn-ghost" href="#features">
+                    Features
+                </a>
                 <button className="btn btn-ghost">Contact</button>
             </div>
 
             <div className="navbar-end space-x-4">
                 <label
-                    htmlFor="my-modal-3"
                     className="btn btn-outline w-max hidden sm:flex"
+                    onClick={openAuthModalAsSignIn}
                 >
                     Sign In
                 </label>
                 <label
-                    htmlFor="my-modal-3"
-                    className="btn btn-primary w-max hidden sm:flex"
+                    className="btn btn-primary text-white w-max hidden sm:flex"
+                    onClick={openAuthModalAsSignUp}
                 >
                     Sign Up
                 </label>
