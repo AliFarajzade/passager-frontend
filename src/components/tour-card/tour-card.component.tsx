@@ -7,7 +7,7 @@ import {
 import { MdPersonOutline } from 'react-icons/md'
 
 const tourData = {
-    name: 'The sea explorer',
+    name: 'The sahara explore',
     averageRating: 4.2,
     price: 479,
     ratingsQuantity: 243,
@@ -37,86 +37,97 @@ const TourCard: React.FC = () => {
         .sort()[0]
 
     return (
-        <div className="w-full p-5 flex items-center rounded-md overflow-hidden border-[1px] border-slate-300">
+        <article className="grid grid-cols-1 border-[1px] border-lightGreenAlpha p-6 rounded-md md:grid-cols-2 items-center">
             <div
-                className="h-64 w-3/5 bg-no-repeat rounded-md bg-cover bg-center shadow-xl transition-transform hover:scale-105"
+                className="bg-cover bg-no-repeat bg-center w-full h-[288px] md:h-full transition-transform rounded-md shadow-xl  hover:scale-105 "
                 style={{ backgroundImage: `url(${tourData.coverImage})` }}
             ></div>
-            <div className="w-full h-full flex flex-col gap-3 pl-5">
-                <div className="flex items-center gap-3 tracking-wide">
-                    <h1 className="text-2xl font-bold uppercase">
-                        {tourData.name}
-                    </h1>
-                    <span className="text-sm font-semibold text-slate-600 italic mr-auto">
-                        {`${tourData.difficulty} ${tourData.duration}-day tour`.toUpperCase()}
-                    </span>
-                    <span className="font-semibold text-lg">
-                        ${tourData.price}
-                    </span>
-                </div>
-                <div className="w-full flex items-center gap-3">
-                    <div className="rating rating-sm">
-                        <input
-                            type="radio"
-                            onChange={e => console.log(e.target.value)}
-                            name="rating-2"
-                            className="mask mask-star-2 bg-orange-400"
-                            checked={tourData.averageRating > 1}
-                        />
-                        <input
-                            type="radio"
-                            onChange={e => console.log(e.target.value)}
-                            name="rating-2"
-                            className="mask mask-star-2 bg-orange-400"
-                            checked={tourData.averageRating > 2}
-                        />
-                        <input
-                            type="radio"
-                            onChange={e => console.log(e.target.value)}
-                            name="rating-2"
-                            className="mask mask-star-2 bg-orange-400"
-                            checked={tourData.averageRating > 3}
-                        />
-                        <input
-                            type="radio"
-                            onChange={e => console.log(e.target.value)}
-                            name="rating-2"
-                            className="mask mask-star-2 bg-orange-400"
-                            checked={tourData.averageRating > 4}
-                        />
-                        <input
-                            type="radio"
-                            onChange={e => console.log(e.target.value)}
-                            name="rating-2"
-                            className="mask mask-star-2 bg-orange-400"
-                            checked={tourData.averageRating > 4.8}
-                        />
+            <div className="px-4 py-6 space-y-6  md:pl-6 md:py-2">
+                <div className="space-y-2">
+                    <div className="uppercase flex flex-col gap-4">
+                        <h1 className="font-bold text-2xl text-gradient">
+                            {tourData.name}
+                        </h1>
+                        <div className="flex items-center justify-between">
+                            <h4 className="italic font-bold text-gray-500">
+                                {tourData.difficulty} {tourData.duration}-day
+                                tour
+                            </h4>
+                            <span className="font-bold text-[23px] text-gray-600 text-lightGreenAlpha">
+                                ${tourData.price}
+                            </span>
+                        </div>
                     </div>
-                    <span className="text-sm text-slate-600">
-                        {tourData.ratingsQuantity}
-                    </span>
+                    <div className="flex gap-2 items-center">
+                        <div className="rating rating-sm ">
+                            <input
+                                type="radio"
+                                name="rating-6"
+                                className="mask mask-star-2 bg-lightGreen"
+                            />
+                            <input
+                                type="radio"
+                                name="rating-6"
+                                className="mask mask-star-2 bg-lightGreen"
+                                checked
+                            />
+                            <input
+                                type="radio"
+                                name="rating-6"
+                                className="mask mask-star-2 bg-lightGreen"
+                            />
+                            <input
+                                type="radio"
+                                name="rating-6"
+                                className="mask mask-star-2 bg-lightGreen"
+                            />
+                            <input
+                                type="radio"
+                                name="rating-6"
+                                className="mask mask-star-2 bg-lightGreen"
+                            />
+                        </div>
+                        <span>{tourData.ratingsQuantity}</span>
+                    </div>
+                    <p>
+                        {tourData.summary.split(' ').slice(0, 33).join(' ')}...
+                    </p>
                 </div>
-                <p className="text-[15px]">{tourData.summary}</p>
-                <div className="grid grid-cols-4  text-sm">
+                <div className="grid grid-cols-2 gap-3 sm:gap-6 whitespace-nowrap">
                     <div className="flex gap-2 flex-wrap">
-                        <HiOutlineLocationMarker size="1.5em" />
+                        <HiOutlineLocationMarker
+                            size="1.5em"
+                            className="text-lightGreenAlpha"
+                        />
                         <span>{tourData.startLocation.description}</span>
                     </div>
                     <div className="flex gap-2">
-                        <HiOutlineCalendar size="1.5em" />
+                        <HiOutlineCalendar
+                            size="1.5em"
+                            className="text-lightGreenAlpha"
+                        />
                         <span>{moment(nearestDate).format('MMMM Do')}</span>
                     </div>
                     <div className="flex gap-2">
-                        <HiOutlineFlag size="1.5em" />
+                        <HiOutlineFlag
+                            size="1.5em"
+                            className="text-lightGreenAlpha"
+                        />
                         <span>{tourData.locations.length} Stops</span>
                     </div>
                     <div className="flex gap-1">
-                        <MdPersonOutline size="1.5em" />
+                        <MdPersonOutline
+                            size="1.5em"
+                            className="text-lightGreenAlpha"
+                        />
                         <span>{tourData.maxGroupSize} People</span>
                     </div>
                 </div>
+                <button className="btn btn-primary  text-white w-full">
+                    Learn more
+                </button>
             </div>
-        </div>
+        </article>
     )
 }
 
