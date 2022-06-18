@@ -9,7 +9,7 @@ const ToursPage: NextPage = () => {
         <>
             <ToursPageSlider />
             <ToursPageLayout>
-                <section className="mt-5 rounded-md overflow-hidden sticky top-2">
+                <section className="mt-5 rounded-md overflow-hidden sticky top-2 h-full">
                     <DatePicker />
                     {/* <PriceRange /> */}
                     {/* <SelectDuration /> */}
