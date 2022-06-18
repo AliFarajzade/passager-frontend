@@ -58,6 +58,12 @@ html {
     }
 }
 
+@layer components {
+    .text-gradient {
+        @apply bg-gradient-to-r from-darkGreen to-lightGreen bg-clip-text text-transparent;
+    }
+}
+
 .card {
     cursor: pointer;
     perspective: 1500px;
