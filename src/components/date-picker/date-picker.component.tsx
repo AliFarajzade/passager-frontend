@@ -26,7 +26,9 @@ const DatePicker: React.FC = () => {
                 When are you traveling?
             </h2>
             <div
-                className="bg-white p-3 flex items-center gap-3 rounded-md text-slate-500 cursor-pointer hover:bg-white/90"
+                className={`bg-white p-3 flex items-center gap-3 rounded-md text-slate-500 cursor-pointer hover:bg-white/90 ${
+                    datePickerVisibility && 'bg-white/70'
+                }`}
                 onClick={toggleOpenCalender}
             >
                 <AiOutlineCalendar size="2em" />
