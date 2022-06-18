@@ -4,10 +4,10 @@ interface IProps {
 const ToursPageLayout: React.FC<IProps> = ({ children }) => {
     return (
         <main className="flex gap-5 justify-between">
-            <section className="hidden md:block md:w-[250px] lg:w-[337px] md:shrink-0">
+            <section className="hidden lg:w-[337px] xl:block xl:shrink-0">
                 {children[0]}
             </section>
-            <section className="w-full md:grow md:shrink">
+            <section className="w-full lg:grow lg:shrink">
                 {children[1]}
             </section>
         </main>
