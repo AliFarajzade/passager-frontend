@@ -12,3 +12,5 @@ declare module 'theme-change'
 declare module '*.jpg'
 declare module '*.woff'
 declare module '*.woff2'
+
+declare module 'react-rating-stars-component'
