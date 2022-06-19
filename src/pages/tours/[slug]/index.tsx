@@ -2,6 +2,7 @@ import { NextPage } from 'next'
 import TourInfo from '../../../components/tour-info/tour-info.component'
 import TourPageLayout from '../../../components/tour-page-layout/tour-page-layout.component'
 import TourPageSlider from '../../../components/tour-page-slider/tour-page-slider.component'
+import TourPrice from '../../../components/tour-price/tour-price.component'
 
 const tourData = {
     name: 'The sahara explore',
@@ -69,9 +70,9 @@ const TourPage: NextPage = () => {
             <section>
                 <TourPageSlider tourImages={tourData.images} />
             </section>
-            <section>
+            <section className="space-y-6">
                 <TourInfo tourData={tourData} />
-                {/* <TourPrice /> */}
+                <TourPrice tourPrice={tourData.price} />
             </section>
         </TourPageLayout>
     )
