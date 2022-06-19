@@ -84,15 +84,23 @@ const TourPage: NextPage = () => {
     console.log(process.env.MAPBOX_SECRET_KEY)
     return (
         <TourPageLayout>
-            <section className="space-y-4">
+            <section className="space-y-6">
                 <TourPageSlider tourImages={tourData.images} />
-                <TourPageMap
-                    locations={tourData.locations}
-                    startLocation={tourData.startLocation}
-                />
+                <div className="hidden xl:block">
+                    <TourPageMap
+                        locations={tourData.locations}
+                        startLocation={tourData.startLocation}
+                    />
+                </div>
             </section>
             <section className="space-y-6">
                 <TourInfo tourData={tourData} />
+                <div className="block xl:hidden">
+                    <TourPageMap
+                        locations={tourData.locations}
+                        startLocation={tourData.startLocation}
+                    />
+                </div>
                 <TourPrice tourPrice={tourData.price} />
                 <TourGuides tourGuides={tourData.guides} />
             </section>
