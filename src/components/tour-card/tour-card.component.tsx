@@ -50,10 +50,10 @@ const TourCard: React.FC = () => {
     )
 
     return (
-        <article className="grid grid-cols-1 border-[1px] border-lightGreenAlpha p-6 rounded-md md:grid-cols-2 items-center">
+        <article className="bg-white grid grid-cols-1 border-[1px] border-lightGreenAlpha p-6 rounded-md md:grid-cols-2 items-center">
             <div
                 onClick={naviagteToTourPage}
-                className="bg-cover bg-no-repeat bg-center w-full h-[288px] md:h-full transition-transform rounded-md shadow-xl  hover:scale-105 cursor-pointer"
+                className="bg-cover bg-no-repeat bg-center w-full h-[288px] md:h-full transition-transform rounded-md shadow-lg  hover:scale-105 cursor-pointer"
                 style={{ backgroundImage: `url(${tourData.coverImage})` }}
             ></div>
             <div className="px-4 py-6 space-y-6  md:pl-6 md:py-2">

@@ -10,7 +10,7 @@ interface IProps {
 
 const TourGuides: React.FC<IProps> = ({ tourGuides }) => {
     return (
-        <div className="space-y-6">
+        <div className="space-y-6 ">
             <div className="text-center text-xl font-semibold bg-white shadow-md rounded-md py-5">
                 Your Guides:
             </div>

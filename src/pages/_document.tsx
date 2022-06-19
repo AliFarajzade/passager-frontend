@@ -4,7 +4,7 @@ export default function Document() {
     return (
         <Html data-theme="emerald" lang="en">
             <Head />
-            <body>
+            <body className="bg-slate-100">
                 <Main />
                 <NextScript />
             </body>

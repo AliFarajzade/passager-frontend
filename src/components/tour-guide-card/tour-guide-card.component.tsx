@@ -13,7 +13,7 @@ const TourGuideCard: React.FC<IProps> = ({ tourGuide }) => {
     return (
         <div
             className="max-h-[400px] border-[1px] border-lightGreenAlpha rounded-lg shadow-lg flex flex-col items-center
-        py-6 px-4 text-center"
+        py-6 px-4 text-center bg-white"
         >
             <div className="w-24 mask mask-squircle">
                 <Image

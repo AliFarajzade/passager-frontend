@@ -44,10 +44,10 @@ const TourPageMap: React.FC<IProps> = ({ locations, startLocation }) => {
             container: mapContainer.current,
             style: 'mapbox://styles/mapbox/streets-v11',
             center: [
-                allLocations[1].coordinates[0],
-                allLocations[1].coordinates[1],
+                allLocations[2].coordinates[0],
+                allLocations[2].coordinates[1],
             ],
-            zoom: 6,
+            zoom: 6.5,
         })
 
         // Add markers
@@ -78,7 +78,7 @@ const TourPageMap: React.FC<IProps> = ({ locations, startLocation }) => {
     }, [allLocations])
 
     return (
-        <main>
+        <main className="rounded-md overflow-hidden">
             <div className="map-container h-[450px]" ref={mapContainer} />
         </main>
     )

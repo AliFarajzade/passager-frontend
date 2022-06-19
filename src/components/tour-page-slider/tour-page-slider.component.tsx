@@ -17,7 +17,7 @@ const TourPageSlider: React.FC<IProps> = ({ tourImages }) => {
         <Swiper
             navigation={true}
             modules={[Navigation]}
-            className="w-full h-[45vh] lg:h-[65vh]"
+            className="w-full h-[45vh] lg:h-[65vh] rounded-md"
         >
             {tourImages.map(tourImage => (
                 <SwiperSlide key={tourImage}>

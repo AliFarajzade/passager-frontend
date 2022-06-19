@@ -6,7 +6,7 @@ interface IProps {
 
 const TourPrice: React.FC<IProps> = ({ tourPrice }) => {
     return (
-        <div className="p-4 border-[1px] border-lightGreenAlpha rounded-md w-full shadow-lg space-y-4">
+        <div className="p-4 border-[1px] border-lightGreenAlpha rounded-md w-full shadow-lg space-y-4 bg-white">
             <span className="text-4xl font-bold tracking-wide text-gradient">
                 ${tourPrice}
             </span>

@@ -15,7 +15,7 @@ const ToursPage: NextPage = () => {
             <ToursPageSlider />
             <SmallerScreenFilter />
             <ToursPageLayout>
-                <section className="mb-5 rounded-md overflow-hidden bg-gray-100 pb-4">
+                <section className="mb-5 rounded-md overflow-hidden bg-white pb-4">
                     <DatePicker />
                     <PriceRange />
                     <SelectDuration />
