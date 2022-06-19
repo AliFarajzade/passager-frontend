@@ -1,5 +1,6 @@
 import type { NextPage } from 'next'
 import DatePicker from '../../components/date-picker/date-picker.component'
+import DifficultyPicker from '../../components/difficulty-picker/difficulty-picker.component'
 import ToursPageLayout from '../../components/layout/tours-page-layout.component'
 import PriceRange from '../../components/price-range/price-range.component'
 import RatingPicker from '../../components/rating-picker/rating-picker.component'
@@ -12,11 +13,12 @@ const ToursPage: NextPage = () => {
         <>
             <ToursPageSlider />
             <ToursPageLayout>
-                <section className="mt-5 rounded-md overflow-hidden sticky top-2  bg-gray-100">
+                <section className="mt-5 rounded-md overflow-hidden bg-gray-100 pb-4">
                     <DatePicker />
                     <PriceRange />
                     <SelectDuration />
                     <RatingPicker />
+                    <DifficultyPicker />
                 </section>
                 <section className="space-y-10 p-5">
                     <TourCard />
