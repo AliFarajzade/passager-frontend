@@ -36,7 +36,7 @@ const DatePicker: React.FC = () => {
             </div>
             {datePickerVisibility && (
                 <DateRange
-                    className="-translate-x-3 relative z-50"
+                    className="border-2 border-slate-300 xl:-translate-x-3 xl:border-0 relative z-50"
                     editableDateInputs={true}
                     onChange={item => {
                         const { startDate, endDate, key } =
