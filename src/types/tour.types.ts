@@ -1,3 +1,5 @@
+import { TGuide } from './guide.types'
+
 export type TTour = {
     name: string
     averageRating: number
@@ -24,4 +26,5 @@ export type TTour = {
         day: number
     }[]
     slug: string
+    guides: TGuide[]
 }
