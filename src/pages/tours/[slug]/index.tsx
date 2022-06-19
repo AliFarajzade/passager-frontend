@@ -1,4 +1,5 @@
 import { NextPage } from 'next'
+import TourInfo from '../../../components/tour-info/tour-info.component'
 import TourPageLayout from '../../../components/tour-page-layout/tour-page-layout.component'
 import TourPageSlider from '../../../components/tour-page-slider/tour-page-slider.component'
 
@@ -31,6 +32,8 @@ const tourData = {
         address: '301 Biscayne Blvd, Miami, FL 33132, USA',
         description: 'Miami, USA',
     },
+    description:
+        'The Sahara is much more than just sand – in fact, the majority of the Sahara is made up of barren, rocky plateaus, as well as salt flats, sand dunes, mountains and dry valleys. The rivers and streams found in the Sahara are all seasonal, apart from the River Nile. There are over 20 lakes in the Sahara, most of which are saltwater lakes. Lake Chad is the only freshwater lake in the desert.',
     locations: [
         {
             type: 'Point',
@@ -66,7 +69,10 @@ const TourPage: NextPage = () => {
             <section>
                 <TourPageSlider tourImages={tourData.images} />
             </section>
-            <section>Sidebar</section>
+            <section>
+                <TourInfo tourData={tourData} />
+                {/* <TourPrice /> */}
+            </section>
         </TourPageLayout>
     )
 }
