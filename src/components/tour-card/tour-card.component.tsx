@@ -1,4 +1,6 @@
 import moment from 'moment'
+import ReactStars from 'react-rating-stars-component'
+
 import {
     HiOutlineCalendar,
     HiOutlineFlag,
@@ -8,7 +10,7 @@ import { MdPersonOutline } from 'react-icons/md'
 
 const tourData = {
     name: 'The sahara explore',
-    averageRating: 4.2,
+    averageRating: 3.2,
     price: 479,
     ratingsQuantity: 243,
     difficulty: 'medium',
@@ -36,6 +38,8 @@ const TourCard: React.FC = () => {
         .filter(date => new Date(date).getTime() - Date.now() > 0)
         .sort()[0]
 
+    const handleChangeRating = (newRating: number) => console.log(newRating)
+
     return (
         <article className="grid grid-cols-1 border-[1px] border-lightGreenAlpha p-6 rounded-md md:grid-cols-2 items-center">
             <div
@@ -59,34 +63,13 @@ const TourCard: React.FC = () => {
                         </div>
                     </div>
                     <div className="flex gap-2 items-center">
-                        <div className="rating rating-sm ">
-                            <input
-                                type="radio"
-                                name="rating-6"
-                                className="mask mask-star-2 bg-lightGreen"
-                            />
-                            <input
-                                type="radio"
-                                name="rating-6"
-                                className="mask mask-star-2 bg-lightGreen"
-                                checked
-                            />
-                            <input
-                                type="radio"
-                                name="rating-6"
-                                className="mask mask-star-2 bg-lightGreen"
-                            />
-                            <input
-                                type="radio"
-                                name="rating-6"
-                                className="mask mask-star-2 bg-lightGreen"
-                            />
-                            <input
-                                type="radio"
-                                name="rating-6"
-                                className="mask mask-star-2 bg-lightGreen"
-                            />
-                        </div>
+                        <ReactStars
+                            count={5}
+                            onChange={handleChangeRating}
+                            size={25}
+                            activeColor="#7ed56f"
+                            value={tourData.averageRating}
+                        />
                         <span>{tourData.ratingsQuantity}</span>
                     </div>
                     <p>
