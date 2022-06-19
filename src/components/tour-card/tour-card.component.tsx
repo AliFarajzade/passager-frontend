@@ -1,6 +1,8 @@
 import moment from 'moment'
 import ReactStars from 'react-rating-stars-component'
 
+import { useRouter } from 'next/router'
+import { useCallback } from 'react'
 import {
     HiOutlineCalendar,
     HiOutlineFlag,
@@ -40,16 +42,27 @@ const TourCard: React.FC = () => {
 
     const handleChangeRating = (newRating: number) => console.log(newRating)
 
+    const router = useRouter()
+
+    const naviagteToTourPage = useCallback(
+        () => router.push(`/tours/${tourData.slug}`),
+        [router]
+    )
+
     return (
         <article className="grid grid-cols-1 border-[1px] border-lightGreenAlpha p-6 rounded-md md:grid-cols-2 items-center">
             <div
-                className="bg-cover bg-no-repeat bg-center w-full h-[288px] md:h-full transition-transform rounded-md shadow-xl  hover:scale-105 "
+                onClick={naviagteToTourPage}
+                className="bg-cover bg-no-repeat bg-center w-full h-[288px] md:h-full transition-transform rounded-md shadow-xl  hover:scale-105 cursor-pointer"
                 style={{ backgroundImage: `url(${tourData.coverImage})` }}
             ></div>
             <div className="px-4 py-6 space-y-6  md:pl-6 md:py-2">
                 <div className="space-y-2">
                     <div className="uppercase flex flex-col gap-4">
-                        <h1 className="font-bold text-2xl text-gradient">
+                        <h1
+                            className="font-bold text-2xl text-gradient  cursor-pointer"
+                            onClick={naviagteToTourPage}
+                        >
                             {tourData.name}
                         </h1>
                         <div className="flex items-center justify-between">
@@ -106,7 +119,10 @@ const TourCard: React.FC = () => {
                         <span>{tourData.maxGroupSize} People</span>
                     </div>
                 </div>
-                <button className="btn btn-primary  text-white w-full">
+                <button
+                    className="btn btn-primary  text-white w-full "
+                    onClick={naviagteToTourPage}
+                >
                     Learn more
                 </button>
             </div>
