@@ -1,4 +1,5 @@
 import { NextPage } from 'next'
+import TourGuides from '../../../components/tour-guides/tour-guides.component'
 import TourInfo from '../../../components/tour-info/tour-info.component'
 import TourPageLayout from '../../../components/tour-page-layout/tour-page-layout.component'
 import TourPageSlider from '../../../components/tour-page-slider/tour-page-slider.component'
@@ -62,6 +63,20 @@ const tourData = {
         },
     ],
     slug: 'the-sea-explorer',
+    guides: [
+        {
+            name: 'Rebeca Bennett',
+            photo: '/images/sample/rebeca.jpeg',
+            description:
+                'Rebeca has been a tour guide for over 10 years, and has a passion for adventure. She is a certified Scuba Diver, and passionate about the oceans.',
+        },
+        {
+            name: 'John Doe',
+            photo: '/images/sample/john.jpg',
+            description:
+                'John Doe is a tour guide who has been working in the tourism industry for over 10 years. He is traveling the world since 2012.',
+        },
+    ],
 }
 
 const TourPage: NextPage = () => {
@@ -73,6 +88,7 @@ const TourPage: NextPage = () => {
             <section className="space-y-6">
                 <TourInfo tourData={tourData} />
                 <TourPrice tourPrice={tourData.price} />
+                <TourGuides tourGuides={tourData.guides} />
             </section>
         </TourPageLayout>
     )
