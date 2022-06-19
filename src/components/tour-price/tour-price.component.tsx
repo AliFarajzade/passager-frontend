@@ -10,8 +10,8 @@ const TourPrice: React.FC<IProps> = ({ tourPrice }) => {
             <span className="text-4xl font-bold tracking-wide text-gradient">
                 ${tourPrice}
             </span>
-            <div className="grid grid-cols-4 ">
-                <button className="btn btn-primary border-0 col-span-3 font-bold text-white text-lg capitalize btn-rgb">
+            <div className="flex gap-3">
+                <button className="btn btn-primary border-0 col-span-3 font-bold text-white text-lg capitalize btn-rgb flex-1">
                     Book Now!
                 </button>
                 <button className="col-span-1 btn btn-primary btn-circle btn-outline justify-self-end border-2">

@@ -11,7 +11,7 @@ interface IProps {
 const TourGuideCard: React.FC<IProps> = ({ tourGuide }) => {
     return (
         <div
-            className="h-80 border-[1px] border-lightGreenAlpha rounded-lg shadow-lg flex flex-col items-center
+            className="max-h-80 border-[1px] border-lightGreenAlpha rounded-lg shadow-lg flex flex-col items-center
         py-6 px-4 text-center"
         >
             <div className="w-24 mask mask-squircle">
