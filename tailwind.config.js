@@ -38,12 +38,11 @@ module.exports = {
                     error: '#F87272',
                 },
             },
-            'dark',
         ],
         base: true,
         utils: true,
         logs: true,
         rtl: false,
-        darkTheme: 'dark',
+        darkTheme: 'emerald',
     },
 }
