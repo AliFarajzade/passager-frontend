@@ -13,18 +13,14 @@ const ToursPage: NextPage = () => {
         <>
             <ToursPageSlider />
             <ToursPageLayout>
-                <section className="mt-5 rounded-md overflow-hidden bg-gray-100 pb-4">
+                <section className="mb-5 rounded-md overflow-hidden bg-gray-100 pb-4">
                     <DatePicker />
                     <PriceRange />
                     <SelectDuration />
                     <RatingPicker />
                     <DifficultyPicker />
                 </section>
-                <section className="space-y-10 p-5">
-                    <TourCard />
-                    <TourCard />
-                    <TourCard />
-                    <TourCard />
+                <section className="space-y-10">
                     <TourCard />
                 </section>
             </ToursPageLayout>
