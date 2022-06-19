@@ -2,6 +2,7 @@ import { NextPage } from 'next'
 import TourGuides from '../../../components/tour-guides/tour-guides.component'
 import TourInfo from '../../../components/tour-info/tour-info.component'
 import TourPageLayout from '../../../components/tour-page-layout/tour-page-layout.component'
+import TourPageMap from '../../../components/tour-page-map/tour-page-map.component'
 import TourPageSlider from '../../../components/tour-page-slider/tour-page-slider.component'
 import TourPrice from '../../../components/tour-price/tour-price.component'
 
@@ -80,10 +81,15 @@ const tourData = {
 }
 
 const TourPage: NextPage = () => {
+    console.log(process.env.MAPBOX_SECRET_KEY)
     return (
         <TourPageLayout>
-            <section>
+            <section className="space-y-4">
                 <TourPageSlider tourImages={tourData.images} />
+                <TourPageMap
+                    locations={tourData.locations}
+                    startLocation={tourData.startLocation}
+                />
             </section>
             <section className="space-y-6">
                 <TourInfo tourData={tourData} />
