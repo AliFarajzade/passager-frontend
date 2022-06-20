@@ -65,7 +65,7 @@ const tourData = {
             type: 'Point',
             coordinates: [-81.768719, 24.552242],
             description: 'West Key',
-            day: 5,
+            day: 4,
         },
     ],
     slug: 'the-sea-explorer',
