@@ -7,9 +7,9 @@ type IProps = {
 }
 
 const Layout: React.FC<IProps> = ({ children }) => (
-    <div className="max-w-screen-2xl mx-auto">
+    <div className="">
         <Navbar />
-        <main>{children}</main>
+        <main className="max-w-screen-2xl mx-auto">{children}</main>
         <Footer />
         <AuthModal />
     </div>
