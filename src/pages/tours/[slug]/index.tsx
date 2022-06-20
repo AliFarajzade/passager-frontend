@@ -1,11 +1,15 @@
 import { NextPage } from 'next'
-import { useMemo } from 'react'
+
+import { useEffect, useMemo } from 'react'
+import { useRecoilState } from 'recoil'
 import TourGuides from '../../../components/tour-guides/tour-guides.component'
 import TourInfo from '../../../components/tour-info/tour-info.component'
+import TourLocations from '../../../components/tour-locations/tour-locations.component'
 import TourPageLayout from '../../../components/tour-page-layout/tour-page-layout.component'
 import TourPageMap from '../../../components/tour-page-map/tour-page-map.component'
 import TourPageSlider from '../../../components/tour-page-slider/tour-page-slider.component'
 import TourPrice from '../../../components/tour-price/tour-price.component'
+import mapStateAtom from '../../../recoil/atoms/map.atom'
 
 const tourData = {
     name: 'The sahara explore',
@@ -82,6 +86,8 @@ const tourData = {
 }
 
 const TourPage: NextPage = () => {
+    const [mapState, setMapState] = useRecoilState(mapStateAtom)
+
     const allLocations = useMemo(() => {
         let output = [
             {
@@ -100,6 +106,13 @@ const TourPage: NextPage = () => {
         return output
     }, [])
 
+    useEffect(() => {
+        setMapState(prevState => ({
+            ...prevState,
+            center: allLocations[0].coordinates,
+        }))
+    }, [allLocations, setMapState])
+
     return (
         <TourPageLayout>
             <section className="space-y-6">
@@ -107,6 +120,7 @@ const TourPage: NextPage = () => {
                 <div className="hidden xl:block">
                     <TourPageMap allLocations={allLocations} />
                 </div>
+                <TourLocations allLocations={allLocations} />
             </section>
             <section className="space-y-6">
                 <TourInfo tourData={tourData} />
