@@ -1,7 +1,7 @@
 import { NextPage } from 'next'
 
 import { useEffect, useMemo } from 'react'
-import { useRecoilState } from 'recoil'
+import { useSetRecoilState } from 'recoil'
 import TourGuides from '../../../components/tour-guides/tour-guides.component'
 import TourInfo from '../../../components/tour-info/tour-info.component'
 import TourLocations from '../../../components/tour-locations/tour-locations.component'
@@ -86,7 +86,7 @@ const tourData = {
 }
 
 const TourPage: NextPage = () => {
-    const [mapState, setMapState] = useRecoilState(mapStateAtom)
+    const setMapState = useSetRecoilState(mapStateAtom)
 
     const allLocations = useMemo(() => {
         let output = [
