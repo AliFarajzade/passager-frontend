@@ -31,7 +31,7 @@ const TourPageFeatures: React.FC = () => {
             {featuresData.map(({ title, description, Icon }) => (
                 <div
                     key={title}
-                    className="flex flex-col items-center gap-3 text-center bg-gradient-to-r from-lightGreenAlpha/90 to-darkGreenAlpha/90 rounded-lg p-6 text-white"
+                    className="flex flex-col items-center gap-3 text-center bg-gradient-to-r from-lightGreenAlpha/90 to-darkGreenAlpha/90 rounded-lg p-6 text-white transition-transform hover:scale-105"
                 >
                     <div className="flex flex-col items-center gap-3">
                         <Icon size="2.5em" />
