@@ -29,15 +29,16 @@ const TourLocations: React.FC<IProps> = ({ allLocations }) => {
                 {allLocations.map(location => (
                     <button
                         key={location.description}
-                        className="btn btn-ghost btn-outline flex gap-2 items-center text-center text-lg capitalize flex-grow"
+                        className="btn btn-ghost btn-outline flex gap-1  items-center text-center text-lg capitalize flex-grow"
                         onClick={() => showLocationOnMap(location.coordinates)}
                     >
                         <WiDaySunny
                             size="2em"
                             className="text-lightGreenAlpha"
                         />
-                        Day {location.day}:{' '}
-                        {location.day === 0 && 'Start location: '}
+                        {location.day === 0
+                            ? 'Start location: '
+                            : `Day ${location.day}: `}
                         {location.description}
                     </button>
                 ))}
