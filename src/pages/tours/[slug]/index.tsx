@@ -1,6 +1,6 @@
 import { NextPage } from 'next'
 
-import { useEffect, useMemo } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useSetRecoilState } from 'recoil'
 import TourGuides from '../../../components/tour-guides/tour-guides.component'
 import TourInfo from '../../../components/tour-info/tour-info.component'
@@ -89,6 +89,7 @@ const tourData = {
 
 const TourPage: NextPage = () => {
     const setMapState = useSetRecoilState(mapStateAtom)
+    const [isMounted, setIsMounted] = useState<boolean>(false)
 
     const moreThan1280px = useMediaQuery('(min-width: 1280px)')
 
@@ -117,11 +118,19 @@ const TourPage: NextPage = () => {
         }))
     }, [allLocations, setMapState])
 
+    useEffect(() => {
+        setIsMounted(true)
+
+        return () => {
+            setIsMounted(false)
+        }
+    }, [])
+
     return (
         <TourPageLayout>
             <section className="h-full flex flex-col gap-6">
                 <TourPageSlider tourImages={tourData.images} />
-                {moreThan1280px && (
+                {isMounted && moreThan1280px && (
                     <>
                         <TourPageMap allLocations={allLocations} />
                         <TourLocations allLocations={allLocations} />
@@ -131,7 +140,7 @@ const TourPage: NextPage = () => {
             </section>
             <section className="h-full flex flex-col gap-6">
                 <TourInfo tourData={tourData} />
-                {!moreThan1280px && (
+                {isMounted && !moreThan1280px && (
                     <>
                         <TourPageMap allLocations={allLocations} />
                         <TourLocations allLocations={allLocations} />
