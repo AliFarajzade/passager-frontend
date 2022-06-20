@@ -27,7 +27,7 @@ const featuresData = [
 
 const TourPageFeatures: React.FC = () => {
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 border-[1px] border-lightGreenAlpha bg-white rounded-md p-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 border-[1px] border-lightGreenAlpha bg-white rounded-md p-4 shadow-lg">
             {featuresData.map(({ title, description, Icon }) => (
                 <div
                     key={title}

@@ -12,7 +12,7 @@ const TourInfo: React.FC<IProps> = ({ tourData }) => {
     const handleChangeRating = (newRating: number) => console.log(newRating)
 
     return (
-        <div className="p-4 border-[1px] border-lightGreenAlpha rounded-md w-full shadow-lg bg-white">
+        <div className="p-4 border-[1px] border-lightGreenAlpha rounded-md w-full shadow-lg bg-white flex-1">
             <h1 className="text-gradient text-2xl font-semibold tracking-wide capitalize mb-4">
                 {tourData.name}
             </h1>

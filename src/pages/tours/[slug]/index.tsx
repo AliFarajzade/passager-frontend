@@ -119,7 +119,7 @@ const TourPage: NextPage = () => {
 
     return (
         <TourPageLayout>
-            <section className="space-y-6">
+            <section className="h-full flex flex-col gap-6">
                 <TourPageSlider tourImages={tourData.images} />
                 {moreThan1280px && (
                     <>
@@ -129,7 +129,7 @@ const TourPage: NextPage = () => {
                     </>
                 )}
             </section>
-            <section className="space-y-6">
+            <section className="h-full flex flex-col gap-6">
                 <TourInfo tourData={tourData} />
                 {!moreThan1280px && (
                     <>
