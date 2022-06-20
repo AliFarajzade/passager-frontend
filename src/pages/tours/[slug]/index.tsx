@@ -5,6 +5,7 @@ import { useSetRecoilState } from 'recoil'
 import TourGuides from '../../../components/tour-guides/tour-guides.component'
 import TourInfo from '../../../components/tour-info/tour-info.component'
 import TourLocations from '../../../components/tour-locations/tour-locations.component'
+import TourPageFeatures from '../../../components/tour-page-features/tour-features.component'
 import TourPageLayout from '../../../components/tour-page-layout/tour-page-layout.component'
 import TourPageMap from '../../../components/tour-page-map/tour-page-map.component'
 import TourPageSlider from '../../../components/tour-page-slider/tour-page-slider.component'
@@ -124,6 +125,7 @@ const TourPage: NextPage = () => {
                     <>
                         <TourPageMap allLocations={allLocations} />
                         <TourLocations allLocations={allLocations} />
+                        <TourPageFeatures />
                     </>
                 )}
             </section>
@@ -133,6 +135,7 @@ const TourPage: NextPage = () => {
                     <>
                         <TourPageMap allLocations={allLocations} />
                         <TourLocations allLocations={allLocations} />
+                        <TourPageFeatures />
                     </>
                 )}
                 <TourPrice tourPrice={tourData.price} />
