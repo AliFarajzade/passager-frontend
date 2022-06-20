@@ -1,4 +1,5 @@
 import { NextPage } from 'next'
+import { useMemo } from 'react'
 import TourGuides from '../../../components/tour-guides/tour-guides.component'
 import TourInfo from '../../../components/tour-info/tour-info.component'
 import TourPageLayout from '../../../components/tour-page-layout/tour-page-layout.component'
@@ -81,25 +82,36 @@ const tourData = {
 }
 
 const TourPage: NextPage = () => {
-    console.log(process.env.MAPBOX_SECRET_KEY)
+    const allLocations = useMemo(() => {
+        let output = [
+            {
+                description: tourData.startLocation.description,
+                coordinates: tourData.startLocation.coordinates,
+                day: 0,
+            },
+        ]
+        tourData.locations.map(location =>
+            output.push({
+                description: location.description,
+                coordinates: location.coordinates,
+                day: location.day,
+            })
+        )
+        return output
+    }, [])
+
     return (
         <TourPageLayout>
             <section className="space-y-6">
                 <TourPageSlider tourImages={tourData.images} />
                 <div className="hidden xl:block">
-                    <TourPageMap
-                        locations={tourData.locations}
-                        startLocation={tourData.startLocation}
-                    />
+                    <TourPageMap allLocations={allLocations} />
                 </div>
             </section>
             <section className="space-y-6">
                 <TourInfo tourData={tourData} />
                 <div className="block xl:hidden">
-                    <TourPageMap
-                        locations={tourData.locations}
-                        startLocation={tourData.startLocation}
-                    />
+                    <TourPageMap allLocations={allLocations} />
                 </div>
                 <TourPrice tourPrice={tourData.price} />
                 <TourGuides tourGuides={tourData.guides} />
