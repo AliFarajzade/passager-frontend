@@ -10,7 +10,7 @@ import TourPageLayout from '../../../components/tour-page-layout/tour-page-layou
 import TourPageMap from '../../../components/tour-page-map/tour-page-map.component'
 import TourPageSlider from '../../../components/tour-page-slider/tour-page-slider.component'
 import TourPrice from '../../../components/tour-price/tour-price.component'
-import useMediaQuery from '../../../hooks/use-media-query.component'
+import useMediaQuery from '../../../hooks/use-media-query.hook'
 import mapStateAtom from '../../../recoil/atoms/map.atom'
 
 const tourData = {
