@@ -18,7 +18,7 @@ const TourLocations: React.FC<IProps> = ({ allLocations }) => {
         setMapState(prevState => ({ ...prevState, zoom: 16, center: cords }))
 
     return (
-        <div className="bg-white border-[1px] border-lightGreenAlpha shadow-lg p-4">
+        <div className="bg-white border-[1px] border-lightGreenAlpha shadow-lg p-4 rounded-md">
             <div className="flex gap-3 items-center justify-between p-4 mb-4">
                 <h1 className="text-xl font-bold text-gray-600 flex items-center gap-3">
                     <FiMap size="1.5em" className="text-lightGreenAlpha" />
