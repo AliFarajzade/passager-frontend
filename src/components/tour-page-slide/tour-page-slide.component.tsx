@@ -3,7 +3,6 @@ interface IProps {
 }
 
 const TourPageSlide: React.FC<IProps> = ({ tourImage }) => {
-    console.log(tourImage)
     return (
         <div
             style={{ backgroundImage: `url(${tourImage})` }}
