@@ -9,6 +9,7 @@ import TourPageLayout from '../../../components/tour-page-layout/tour-page-layou
 import TourPageMap from '../../../components/tour-page-map/tour-page-map.component'
 import TourPageSlider from '../../../components/tour-page-slider/tour-page-slider.component'
 import TourPrice from '../../../components/tour-price/tour-price.component'
+import useMediaQuery from '../../../hooks/use-media-query.component'
 import mapStateAtom from '../../../recoil/atoms/map.atom'
 
 const tourData = {
@@ -88,6 +89,8 @@ const tourData = {
 const TourPage: NextPage = () => {
     const setMapState = useSetRecoilState(mapStateAtom)
 
+    const moreThan1280px = useMediaQuery('(min-width: 1280px)')
+
     const allLocations = useMemo(() => {
         let output = [
             {
@@ -117,16 +120,21 @@ const TourPage: NextPage = () => {
         <TourPageLayout>
             <section className="space-y-6">
                 <TourPageSlider tourImages={tourData.images} />
-                <div className="hidden xl:block">
-                    <TourPageMap allLocations={allLocations} />
-                </div>
-                <TourLocations allLocations={allLocations} />
+                {moreThan1280px && (
+                    <>
+                        <TourPageMap allLocations={allLocations} />
+                        <TourLocations allLocations={allLocations} />
+                    </>
+                )}
             </section>
             <section className="space-y-6">
                 <TourInfo tourData={tourData} />
-                <div className="block xl:hidden">
-                    <TourPageMap allLocations={allLocations} />
-                </div>
+                {!moreThan1280px && (
+                    <>
+                        <TourPageMap allLocations={allLocations} />
+                        <TourLocations allLocations={allLocations} />
+                    </>
+                )}
                 <TourPrice tourPrice={tourData.price} />
                 <TourGuides tourGuides={tourData.guides} />
             </section>
