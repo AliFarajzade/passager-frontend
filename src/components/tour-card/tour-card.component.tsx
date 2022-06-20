@@ -10,6 +10,8 @@ import {
 } from 'react-icons/hi'
 import { MdPersonOutline } from 'react-icons/md'
 
+import { getNearestDate } from '../../helpers/nearest-date.helper'
+
 const tourData = {
     name: 'The sahara explore',
     averageRating: 3.2,
@@ -36,9 +38,7 @@ const tourData = {
 }
 
 const TourCard: React.FC = () => {
-    const nearestDate = tourData.startsDates
-        .filter(date => new Date(date).getTime() - Date.now() > 0)
-        .sort()[0]
+    const nearestDate = getNearestDate(tourData.startsDates)
 
     const handleChangeRating = (newRating: number) => console.log(newRating)
 
