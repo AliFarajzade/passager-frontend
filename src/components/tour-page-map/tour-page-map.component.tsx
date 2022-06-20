@@ -1,41 +1,22 @@
-import mapboxgl from 'mapbox-gl'
+import mapboxgl, { LngLatLike } from 'mapbox-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
-import { useEffect, useMemo, useRef } from 'react'
+import { useEffect, useRef } from 'react'
+import { useRecoilValue } from 'recoil'
+import mapStateAtom from '../../recoil/atoms/map.atom'
 
 interface IProps {
-    startLocation: {
-        type: string
-        coordinates: number[]
-        address: string
+    allLocations: {
         description: string
-    }
-    locations: {
-        type: string
         coordinates: number[]
-        description: string
         day: number
     }[]
 }
 
-const TourPageMap: React.FC<IProps> = ({ locations, startLocation }) => {
+const TourPageMap: React.FC<IProps> = ({ allLocations }) => {
+    const mapState = useRecoilValue(mapStateAtom)
+
     const mapContainer = useRef<any>(null)
     const map = useRef<mapboxgl.Map | any>(null)
-
-    const allLocations = useMemo(() => {
-        let output = [
-            {
-                description: startLocation.description,
-                coordinates: startLocation.coordinates,
-            },
-        ]
-        locations.map(location =>
-            output.push({
-                description: location.description,
-                coordinates: location.coordinates,
-            })
-        )
-        return output
-    }, [locations, startLocation.coordinates, startLocation.description])
 
     useEffect(() => {
         mapboxgl.accessToken = process.env
@@ -43,11 +24,8 @@ const TourPageMap: React.FC<IProps> = ({ locations, startLocation }) => {
         map.current = new mapboxgl.Map({
             container: mapContainer.current,
             style: 'mapbox://styles/mapbox/streets-v11',
-            center: [
-                allLocations[2].coordinates[0],
-                allLocations[2].coordinates[1],
-            ],
-            zoom: 6.5,
+            center: mapState.center! as LngLatLike,
+            zoom: mapState.zoom,
         })
 
         // Add markers
@@ -75,7 +53,7 @@ const TourPageMap: React.FC<IProps> = ({ locations, startLocation }) => {
                     .addTo(map.current)
             })
         })
-    }, [allLocations])
+    }, [allLocations, mapState.zoom, mapState.center])
 
     return (
         <main className="rounded-md overflow-hidden">
