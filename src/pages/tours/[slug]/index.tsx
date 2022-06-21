@@ -8,6 +8,7 @@ import TourLocations from '../../../components/tour-locations/tour-locations.com
 import TourPageFeatures from '../../../components/tour-page-features/tour-features.component'
 import TourPageLayout from '../../../components/tour-page-layout/tour-page-layout.component'
 import TourPageMap from '../../../components/tour-page-map/tour-page-map.component'
+import TourPageReviews from '../../../components/tour-page-reviews/tour-page-reviews.component'
 import TourPageSlider from '../../../components/tour-page-slider/tour-page-slider.component'
 import TourPrice from '../../../components/tour-price/tour-price.component'
 import useMediaQuery from '../../../hooks/use-media-query.hook'
@@ -127,30 +128,33 @@ const TourPage: NextPage = () => {
     }, [])
 
     return (
-        <TourPageLayout>
-            <section className="h-full flex flex-col gap-6">
-                <TourPageSlider tourImages={tourData.images} />
-                {isMounted && moreThan1280px && (
-                    <>
-                        <TourPageMap allLocations={allLocations} />
-                        <TourLocations allLocations={allLocations} />
-                        <TourPageFeatures />
-                    </>
-                )}
-            </section>
-            <section className="h-full flex flex-col gap-6">
-                <TourInfo tourData={tourData} />
-                {isMounted && !moreThan1280px && (
-                    <>
-                        <TourPageMap allLocations={allLocations} />
-                        <TourLocations allLocations={allLocations} />
-                        <TourPageFeatures />
-                    </>
-                )}
-                <TourPrice tourPrice={tourData.price} />
-                <TourGuides tourGuides={tourData.guides} />
-            </section>
-        </TourPageLayout>
+        <>
+            <TourPageLayout>
+                <section className="h-full flex flex-col gap-6">
+                    <TourPageSlider tourImages={tourData.images} />
+                    {isMounted && moreThan1280px && (
+                        <>
+                            <TourPageMap allLocations={allLocations} />
+                            <TourLocations allLocations={allLocations} />
+                            <TourPageFeatures />
+                        </>
+                    )}
+                </section>
+                <section className="h-full flex flex-col gap-6">
+                    <TourInfo tourData={tourData} />
+                    {isMounted && !moreThan1280px && (
+                        <>
+                            <TourPageMap allLocations={allLocations} />
+                            <TourLocations allLocations={allLocations} />
+                            <TourPageFeatures />
+                        </>
+                    )}
+                    <TourPrice tourPrice={tourData.price} />
+                    <TourGuides tourGuides={tourData.guides} />
+                </section>
+            </TourPageLayout>
+            <TourPageReviews />
+        </>
     )
 }
 
