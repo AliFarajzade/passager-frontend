@@ -22,9 +22,18 @@ const ToursPage: NextPage = () => {
                     <RatingPicker />
                     <DifficultyPicker />
                 </section>
-                <section className="space-y-10">
-                    <TourCard />
-                </section>
+                <>
+                    <section className="space-y-10 mb-8">
+                        <TourCard />
+                    </section>
+                    <div className="w-full flex justify-center">
+                        <div className="btn-group">
+                            <button className="btn">«</button>
+                            <button className="btn">Page 1</button>
+                            <button className="btn">»</button>
+                        </div>
+                    </div>
+                </>
             </ToursPageLayout>
         </>
     )
