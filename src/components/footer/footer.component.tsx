@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { AiFillGithub } from 'react-icons/ai'
 const Footer: React.FC = () => {
     return (
@@ -38,6 +39,10 @@ const Footer: React.FC = () => {
                         Passager 2022
                     </a>
                 </p>
+            </div>
+            <div>
+                <span className="footer-title">Company</span>
+                <Link href="/contact">Contact Us</Link>
             </div>
             <div>
                 <span className="footer-title">Social</span>
