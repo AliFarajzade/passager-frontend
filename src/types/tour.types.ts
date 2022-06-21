@@ -27,4 +27,5 @@ export type TTour = {
     }[]
     slug: string
     guides: TGuide[]
+    discounetedPrice?: number
 }
