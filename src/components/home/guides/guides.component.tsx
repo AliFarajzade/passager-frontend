@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/pagination'
 
-import { Navigation } from 'swiper'
+import { Autoplay, Navigation } from 'swiper'
 import useMediaQuery from '../../../hooks/use-media-query.hook'
 import TourGuideCard from '../../tour-guide-card/tour-guide-card.component'
 
@@ -22,7 +22,7 @@ const Guides: React.FC<IProps> = ({ guidesData }) => {
     const moreThan700 = useMediaQuery('(min-width: 700px)')
 
     return (
-        <div className="py-28 pb-20 px-10">
+        <div className="py-28 pb-20 px-10" id="guides">
             <h1 className="gradient-title mb-16">Our Awesome Guides</h1>
             <Swiper
                 slidesPerView={
@@ -30,7 +30,11 @@ const Guides: React.FC<IProps> = ({ guidesData }) => {
                 }
                 spaceBetween={50}
                 navigation={true}
-                modules={[Navigation]}
+                modules={[Navigation, Autoplay]}
+                autoplay={{
+                    delay: 2500,
+                    disableOnInteraction: false,
+                }}
                 className="mySwiper"
             >
                 {guidesData.map(guide => (
