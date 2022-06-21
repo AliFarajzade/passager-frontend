@@ -49,8 +49,9 @@ const ToursInfo = () => {
                         </p>
                     </div>
                     {/* TODO: Add link */}
-                    <button className="btn btn-ghost text-lightGreen hover:bg-lightGreenAlpha hover:text-white">
-                        Explore Tours <span className="text-3xl">→</span>
+                    <button className="btn btn-ghost text-lightGreen hover:bg-lightGreenAlpha hover:text-white flex items-cetner gap-2">
+                        Explore Tours{' '}
+                        <span className="text-xl -translate-y-[3px]">→</span>
                     </button>
                 </div>
                 <div className="basis-2/4 relative hidden md:block">
