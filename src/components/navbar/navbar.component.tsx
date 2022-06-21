@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { useSetRecoilState } from 'recoil'
 import authModalStateAtom from '../../recoil/atoms/auth-modal.atom'
 
@@ -18,6 +19,8 @@ const Navbar = () => {
             view: 'signUp',
         }))
 
+    const { pathname } = useRouter()
+
     return (
         <div className="bg-base-100 border-b-2 navbar">
             <div className="navbar-start">
@@ -27,13 +30,22 @@ const Navbar = () => {
                 </button>
             </div>
             <div className="navbar-center space-x-3 hidden lg:block">
-                {/* TODO: Add links */}
-                <button className="btn btn-ghost">Tours</button>
-                <button className="btn btn-ghost">Guides</button>
-                <a className="btn btn-ghost" href="#features">
-                    Features
-                </a>
-                <button className="btn btn-ghost">Contact</button>
+                {pathname === '/' && (
+                    <>
+                        <Link href="/tours">
+                            <button className="btn btn-ghost">Tours</button>
+                        </Link>
+                        <a className="btn btn-ghost" href="#guides">
+                            Guides
+                        </a>
+                        <a className="btn btn-ghost" href="#features">
+                            Features
+                        </a>
+                        <Link href="/contact">
+                            <button className="btn btn-ghost">Contact</button>
+                        </Link>
+                    </>
+                )}
             </div>
 
             <div className="navbar-end space-x-4">
