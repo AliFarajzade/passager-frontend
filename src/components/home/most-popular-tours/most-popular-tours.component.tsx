@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import MostPopularToursCard from '../most-popular-tours-card/most-popular-tours-card.component'
 
 const cardsData = [
@@ -51,9 +52,11 @@ const MostPopularTours: React.FC = () => {
                 ))}
             </div>
             <div className="text-center mx-auto pt-10">
-                <button className="btn btn-primary shadow-lg w-64 h-8 text-lg bg-lightGreenAlpha text-white rounded-full">
-                    Explore Tours
-                </button>
+                <Link href="/tours">
+                    <button className="btn btn-primary shadow-lg w-64 h-8 text-lg bg-lightGreenAlpha text-white rounded-full">
+                        Explore Tours
+                    </button>
+                </Link>
             </div>
         </section>
     )

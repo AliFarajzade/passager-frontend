@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import TourInfoCard from '../tour-info-card/tour-info-card.component'
 
 const cards = [
@@ -48,11 +49,14 @@ const ToursInfo = () => {
                             yourself to the influence of the earth.
                         </p>
                     </div>
-                    {/* TODO: Add link */}
-                    <button className="btn btn-ghost text-lightGreen hover:bg-lightGreenAlpha hover:text-white flex items-cetner gap-2">
-                        Explore Tours{' '}
-                        <span className="text-xl -translate-y-[3px]">→</span>
-                    </button>
+                    <Link href="/tours">
+                        <button className="btn btn-ghost text-lightGreen hover:bg-lightGreenAlpha hover:text-white flex items-cetner gap-2">
+                            Explore Tours{' '}
+                            <span className="text-xl -translate-y-[3px]">
+                                →
+                            </span>
+                        </button>
+                    </Link>
                 </div>
                 <div className="basis-2/4 relative hidden md:block">
                     {cards.map((cardData, index) => (
