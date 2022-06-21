@@ -106,7 +106,7 @@ const TourPageReviews: React.FC = () => {
                                         </div>
                                     </div>
                                 ) : (
-                                    <div className="w-14 h-14 rounded-full  flex justify-center items-center bg-lightGreen font-bold text-white text-lg">
+                                    <div className="w-14 h-14 rounded-full  flex justify-center items-center bg-lightGreen font-bold text-white text-lg flex-shrink-0">
                                         {review.user.name
                                             .split(' ')
                                             .map(name => name[0])
@@ -114,7 +114,7 @@ const TourPageReviews: React.FC = () => {
                                     </div>
                                 )}
                                 <div>
-                                    <div className="flex items-center gap-2">
+                                    <div className="flex items-center gap-2 flex-wrap">
                                         <h2>{review.user.name}</h2>
                                         <b>·</b>
                                         <span className="text-gray-400">
