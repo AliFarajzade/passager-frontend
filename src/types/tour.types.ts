@@ -1,9 +1,11 @@
 import { TGuide } from './guide.types'
 
 export type TTour = {
+    _id: number
     name: string
     averageRating: number
     price: number
+    city: string
     ratingsQuantity: number
     difficulty: string
     maxGroupSize: number
@@ -11,7 +13,7 @@ export type TTour = {
     images: string[]
     summary: string
     coverImage: string
-    startsDates: string[]
+    startDates: string[]
     description: string
     startLocation: {
         type: string
