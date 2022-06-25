@@ -1,5 +1,6 @@
 import type { GetServerSideProps, NextPage } from 'next'
-import { useEffect } from 'react'
+import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import DatePicker from '../../components/date-picker/date-picker.component'
@@ -40,6 +41,11 @@ interface IProps {
 }
 
 const ToursPage: NextPage<IProps> = ({ response, error }) => {
+    const router = useRouter()
+    const initialPage = router.query.page ?? 1
+
+    const [page, setPage] = useState<number>(+initialPage)
+
     useEffect(() => {
         if (error && !response) toast.error('Cannot get tours.')
     }, [error, response])
@@ -70,7 +76,11 @@ const ToursPage: NextPage<IProps> = ({ response, error }) => {
                         )}
                     </section>
                     {!(error || !response || response.results === 0) && (
-                        <TourPagePagination page={1} />
+                        <TourPagePagination
+                            page={page}
+                            setPage={setPage}
+                            total={response.total}
+                        />
                     )}
                 </>
             </ToursPageLayout>
