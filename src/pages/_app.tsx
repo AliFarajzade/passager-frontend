@@ -2,6 +2,7 @@ import type { AppProps } from 'next/app'
 import Router from 'next/router'
 import NProgress from 'nprogress'
 import { useEffect } from 'react'
+import { ToastContainer } from 'react-toastify'
 import { RecoilRoot } from 'recoil'
 import Layout from '../components/layout/layout.component'
 import '../styles/globals.scss'
@@ -26,6 +27,13 @@ function MyApp({ Component, pageProps }: AppProps) {
         <RecoilRoot>
             <Layout>
                 <Component {...pageProps} />
+                <ToastContainer
+                    position="top-center"
+                    autoClose={2000}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                />
             </Layout>
         </RecoilRoot>
     )
