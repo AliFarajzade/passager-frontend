@@ -11,34 +11,14 @@ import {
 import { MdPersonOutline } from 'react-icons/md'
 
 import { getNearestDate } from '../../helpers/nearest-date.helper'
+import { TTour } from '../../types/tour.types'
 
-const tourData = {
-    name: 'The sahara explore',
-    averageRating: 3.2,
-    price: 479,
-    ratingsQuantity: 243,
-    difficulty: 'medium',
-    maxGroupSize: 10,
-    duration: 7,
-    images: ['1', '2', '3'],
-    summary:
-        'Cruise the Miami coastline "Miami Vice-style" on this speedboat cruise. Settle in to your plush seat as your expert captain pilots the speedboat down the sandy shoreline, where you can view Fisher Island and Star Island\'s collection of multi-millionaire and celebrity homes.',
-
-    coverImage: '/images/sample/tour-card-1.jpg',
-    startsDates: [
-        '2022-06-22T12:50:48.958Z',
-        '2022-07-22T12:50:48.958Z',
-        '2022-08-22T12:50:48.958Z',
-    ],
-    startLocation: {
-        description: 'Miami, USA',
-    },
-    locations: ['1', '2', '3', '4'],
-    slug: 'the-sea-explorer',
+interface IProps {
+    tourData: TTour
 }
 
-const TourCard: React.FC = () => {
-    const nearestDate = getNearestDate(tourData.startsDates)
+const TourCard: React.FC<IProps> = ({ tourData }) => {
+    const nearestDate = getNearestDate(tourData.startDates)
 
     const handleChangeRating = (newRating: number) => console.log(newRating)
 
@@ -46,7 +26,7 @@ const TourCard: React.FC = () => {
 
     const naviagteToTourPage = useCallback(
         () => router.push(`/tours/${tourData.slug}`),
-        [router]
+        [router, tourData.slug]
     )
 
     return (
@@ -70,7 +50,7 @@ const TourCard: React.FC = () => {
                                 {tourData.difficulty} {tourData.duration}-day
                                 tour
                             </h4>
-                            <span className="font-bold text-[23px] text-gray-600 text-lightGreenAlpha">
+                            <span className="font-bold text-[23px]  text-lightGreenAlpha">
                                 ${tourData.price}
                             </span>
                         </div>
@@ -93,7 +73,7 @@ const TourCard: React.FC = () => {
                     <div className="flex gap-2 flex-wrap">
                         <HiOutlineLocationMarker
                             size="1.5em"
-                            className="text-lightGreenAlpha"
+                            className="text-lightGreenAlpha flex-shrink-0"
                         />
                         <span>{tourData.startLocation.description}</span>
                     </div>
