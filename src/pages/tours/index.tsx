@@ -1,4 +1,7 @@
 import type { GetServerSideProps, NextPage } from 'next'
+import { useEffect } from 'react'
+import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import DatePicker from '../../components/date-picker/date-picker.component'
 import DifficultyPicker from '../../components/difficulty-picker/difficulty-picker.component'
 import ToursPageLayout from '../../components/layout/tours-page-layout.component'
@@ -8,6 +11,7 @@ import RatingPicker from '../../components/rating-picker/rating-picker.component
 import SelectDuration from '../../components/select-duration/select-duration.component'
 import SmallerScreenFilter from '../../components/small-screen-filter/small-screen-filter.component'
 import TourCard from '../../components/tour-card/tour-card.component'
+import TourPagePagination from '../../components/tour-page-pagination/tour-page-pagination.component'
 import ToursPageSlider from '../../components/tours-page-slider/tours-page-slider.component'
 import axiosInstance from '../../helpers/axios-instance.helper'
 import { THTTPResponse } from '../../types/http-response.types'
@@ -37,8 +41,13 @@ interface IProps {
 
 const ToursPage: NextPage<IProps> = ({ response, error }) => {
     //  TODO: Add error UI.
-    console.log({ error })
+
     console.log({ response })
+    console.log({ error })
+
+    useEffect(() => {
+        if (error && !response) toast.error('Cannot get tours.')
+    }, [error, response])
 
     return (
         <>
@@ -65,13 +74,9 @@ const ToursPage: NextPage<IProps> = ({ response, error }) => {
                             <NotFoundTour />
                         )}
                     </section>
-                    <div className="w-full flex justify-center">
-                        <div className="btn-group">
-                            <button className="btn">«</button>
-                            <button className="btn">Page 1</button>
-                            <button className="btn">»</button>
-                        </div>
-                    </div>
+                    {!(error || !response || response.results === 0) && (
+                        <TourPagePagination page={1} />
+                    )}
                 </>
             </ToursPageLayout>
         </>
