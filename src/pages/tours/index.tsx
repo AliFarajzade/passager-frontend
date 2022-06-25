@@ -17,9 +17,9 @@ import axiosInstance from '../../helpers/axios-instance.helper'
 import { THTTPResponse } from '../../types/http-response.types'
 import { TTour } from '../../types/tour.types'
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getServerSideProps: GetServerSideProps = async context => {
     try {
-        const response = await axiosInstance.get('/tours')
+        const response = await axiosInstance.get(context.resolvedUrl)
         return {
             props: {
                 response: response.data,
@@ -40,11 +40,6 @@ interface IProps {
 }
 
 const ToursPage: NextPage<IProps> = ({ response, error }) => {
-    //  TODO: Add error UI.
-
-    console.log({ response })
-    console.log({ error })
-
     useEffect(() => {
         if (error && !response) toast.error('Cannot get tours.')
     }, [error, response])
