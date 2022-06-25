@@ -66,7 +66,8 @@ const TourCard: React.FC<IProps> = ({ tourData }) => {
                         <span>{tourData.ratingsQuantity}</span>
                     </div>
                     <p>
-                        {tourData.summary.split(' ').slice(0, 33).join(' ')}...
+                        {tourData.description.split(' ').slice(0, 33).join(' ')}
+                        ...
                     </p>
                 </div>
                 <div className="grid grid-cols-2 gap-3 sm:gap-6 whitespace-nowrap">
