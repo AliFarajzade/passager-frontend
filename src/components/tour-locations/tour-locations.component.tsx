@@ -50,6 +50,7 @@ const TourLocations: React.FC<IProps> = ({ allLocations }) => {
             </div>
             <div className="flex gap-x-2 gap-y-4 flex-wrap items-center">
                 {allLocations.map(location => (
+                    // TODO: Fix for long text small screen
                     <button
                         key={location.description}
                         className="btn btn-ghost btn-outline flex gap-1  items-center text-center text-lg capitalize flex-grow"
