@@ -1,4 +1,5 @@
-import { useCallback, useState } from 'react'
+import { useRouter } from 'next/router'
+import { useCallback, useEffect, useState } from 'react'
 import { DateRange, Range } from 'react-date-range'
 import 'react-date-range/dist/styles.css' // main css file
 import 'react-date-range/dist/theme/default.css' // theme css file
@@ -9,17 +10,32 @@ const DatePicker: React.FC = () => {
         useState<boolean>(false)
     const [date, setDate] = useState<Range[]>([
         {
-            startDate: new Date(),
-            endDate: new Date(),
+            startDate: undefined,
+            endDate: undefined,
             key: 'selection',
         },
     ])
+
+    const router = useRouter()
 
     const toggleOpenCalender = useCallback(
         () => setDatePickerVisibility(prevState => !prevState),
         []
     )
 
+    useEffect(() => {
+        if (!date[0].endDate || !date[0].startDate) return
+
+        router.push({
+            query: {
+                ...router.query,
+                'startDate[gte]': date[0].startDate.toISOString(),
+                'startDate[lte]': date[0].endDate.toISOString(),
+            },
+        })
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [date[0].startDate?.getTime(), date[0].endDate?.getTime()])
     return (
         <div className="bg-lightGreenAlpha p-4 space-y-3 h-[128px] select-none">
             <h2 className="text-lg font-semibold text-white">
