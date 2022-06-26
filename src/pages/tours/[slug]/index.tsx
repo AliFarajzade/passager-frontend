@@ -1,7 +1,8 @@
-import { NextPage } from 'next'
+import { GetServerSideProps, NextPage } from 'next'
 
 import { useEffect, useMemo, useState } from 'react'
 import { useSetRecoilState } from 'recoil'
+import GeneralNotFound from '../../../components/general-not-found/general-not-found.component'
 import TourGuides from '../../../components/tour-guides/tour-guides.component'
 import TourInfo from '../../../components/tour-info/tour-info.component'
 import TourLocations from '../../../components/tour-locations/tour-locations.component'
@@ -11,112 +12,76 @@ import TourPageMap from '../../../components/tour-page-map/tour-page-map.compone
 import TourPageReviews from '../../../components/tour-page-reviews/tour-page-reviews.component'
 import TourPageSlider from '../../../components/tour-page-slider/tour-page-slider.component'
 import TourPrice from '../../../components/tour-price/tour-price.component'
+import axiosInstance from '../../../helpers/axios-instance.helper'
 import useMediaQuery from '../../../hooks/use-media-query.hook'
 import mapStateAtom from '../../../recoil/atoms/map.atom'
+import { THTTPResponse } from '../../../types/http-response.types'
 import { TTour } from '../../../types/tour.types'
 
-const tourData: TTour = {
-    city: 'adsa',
-    priceToPound: 123123,
-    _id: 12312313,
-    name: 'The sahara explore',
-    averageRating: 3.2,
-    price: 479,
-    ratingsQuantity: 243,
-    difficulty: 'medium',
-    maxGroupSize: 10,
-    duration: 7,
-    images: [
-        '/images/sample/the-sahara-explorer-1.jpg',
-        '/images/sample/the-sahara-explorer-2.jpg',
-        '/images/sample/the-sahara-explorer-3.jpg',
-        '/images/sample/the-sahara-explorer-4.jpg',
-    ],
-    summary:
-        'Cruise the Miami coastline "Miami Vice-style" on this speedboat cruise. Settle in to your plush seat as your expert captain pilots the speedboat down the sandy shoreline, where you can view Fisher Island and Star Island\'s collection of multi-millionaire and celebrity homes.',
+export const getServerSideProps: GetServerSideProps = async context => {
+    try {
+        const response = await axiosInstance(
+            `/tours/get-by-slug/${context.params!.slug}`
+        )
 
-    coverImage: '/images/sample/tour-card-1.jpg',
-    startDate: '2022-07-22T12:50:48.958Z',
-    startLocation: {
-        type: 'Point',
-        coordinates: [-80.185942, 25.774772],
-        address: '301 Biscayne Blvd, Miami, FL 33132, USA',
-        description: 'Miami, USA',
-    },
-    description:
-        'The Sahara is much more than just sand – in fact, the majority of the Sahara is made up of barren, rocky plateaus, as well as salt flats, sand dunes, mountains and dry valleys. The rivers and streams found in the Sahara are all seasonal, apart from the River Nile. There are over 20 lakes in the Sahara, most of which are saltwater lakes. Lake Chad is the only freshwater lake in the desert.',
-    locations: [
-        {
-            type: 'Point',
-            coordinates: [-80.128473, 25.781842],
-            description: 'Lummus Park Beach',
-            day: 1,
-        },
-        {
-            type: 'Point',
-            coordinates: [-80.647885, 24.909047],
-            description: 'Islamorada',
-            day: 2,
-        },
-        {
-            type: 'Point',
-            coordinates: [-81.0784, 24.707496],
-            description: 'Sombrero Beach',
-            day: 3,
-        },
-        {
-            type: 'Point',
-            coordinates: [-81.768719, 24.552242],
-            description: 'West Key',
-            day: 4,
-        },
-    ],
-    slug: 'the-sea-explorer',
-    guides: [
-        {
-            name: 'Rebeca Bennett',
-            photo: '/images/sample/rebeca.jpeg',
-            description:
-                'Rebeca has been a tour guide for over 10 years, and has a passion for adventure. She is a certified Scuba Diver, and passionate about the oceans.',
-        },
-        {
-            name: 'John Doe',
-            photo: '/images/sample/john.jpg',
-            description:
-                'John Doe is a tour guide who has been working in the tourism industry for over 10 years. He is traveling the world since 2012.',
-        },
-    ],
+        return {
+            props: {
+                response: response.data,
+            },
+        }
+    } catch (error) {
+        return {
+            props: {
+                error: JSON.parse(JSON.stringify(error)),
+            },
+        }
+    }
 }
 
-const TourPage: NextPage = () => {
+interface IProps {
+    response?: THTTPResponse<TTour | null>
+    error?: unknown
+}
+
+const TourPage: NextPage<IProps> = ({ response, error }) => {
+    const tourData = response?.data
+
     const setMapState = useSetRecoilState(mapStateAtom)
     const [isMounted, setIsMounted] = useState<boolean>(false)
 
     const moreThan1280px = useMediaQuery('(min-width: 1280px)')
 
     const allLocations = useMemo(() => {
+        if (!tourData) return []
         let output = [
             {
                 description: tourData.startLocation.description,
-                coordinates: tourData.startLocation.coordinates,
+                coordinates: [
+                    tourData.startLocation.coordinates[1],
+                    tourData.startLocation.coordinates[0],
+                ],
                 day: 0,
             },
         ]
         tourData.locations.map(location =>
             output.push({
                 description: location.description,
-                coordinates: location.coordinates,
+                coordinates: [location.coordinates[1], location.coordinates[0]],
                 day: location.day,
             })
         )
         return output
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     useEffect(() => {
+        if (!allLocations || !tourData) return
         setMapState(prevState => ({
             ...prevState,
             center: allLocations[0].coordinates,
         }))
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [allLocations, setMapState])
 
     useEffect(() => {
@@ -127,7 +92,13 @@ const TourPage: NextPage = () => {
         }
     }, [])
 
-    return (
+    return !tourData || error ? (
+        <GeneralNotFound
+            btnMessage="Visit other tours"
+            message="This tour does not exist"
+            redirect="/tours"
+        />
+    ) : (
         <>
             <TourPageLayout>
                 <section className="h-full flex flex-col gap-6">
