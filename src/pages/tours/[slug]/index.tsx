@@ -13,8 +13,12 @@ import TourPageSlider from '../../../components/tour-page-slider/tour-page-slide
 import TourPrice from '../../../components/tour-price/tour-price.component'
 import useMediaQuery from '../../../hooks/use-media-query.hook'
 import mapStateAtom from '../../../recoil/atoms/map.atom'
+import { TTour } from '../../../types/tour.types'
 
-const tourData = {
+const tourData: TTour = {
+    city: 'adsa',
+    priceToPound: 123123,
+    _id: 12312313,
     name: 'The sahara explore',
     averageRating: 3.2,
     price: 479,
@@ -32,11 +36,7 @@ const tourData = {
         'Cruise the Miami coastline "Miami Vice-style" on this speedboat cruise. Settle in to your plush seat as your expert captain pilots the speedboat down the sandy shoreline, where you can view Fisher Island and Star Island\'s collection of multi-millionaire and celebrity homes.',
 
     coverImage: '/images/sample/tour-card-1.jpg',
-    startsDates: [
-        '2022-06-22T12:50:48.958Z',
-        '2022-07-22T12:50:48.958Z',
-        '2022-08-22T12:50:48.958Z',
-    ],
+    startDate: '2022-07-22T12:50:48.958Z',
     startLocation: {
         type: 'Point',
         coordinates: [-80.185942, 25.774772],
