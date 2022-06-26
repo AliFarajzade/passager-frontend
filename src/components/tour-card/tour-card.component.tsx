@@ -10,7 +10,6 @@ import {
 } from 'react-icons/hi'
 import { MdPersonOutline } from 'react-icons/md'
 
-import { getNearestDate } from '../../helpers/nearest-date.helper'
 import { TTour } from '../../types/tour.types'
 
 interface IProps {
@@ -18,8 +17,6 @@ interface IProps {
 }
 
 const TourCard: React.FC<IProps> = ({ tourData }) => {
-    const nearestDate = getNearestDate(tourData.startDates)
-
     const handleChangeRating = (newRating: number) => console.log(newRating)
 
     const router = useRouter()
@@ -83,7 +80,9 @@ const TourCard: React.FC<IProps> = ({ tourData }) => {
                             size="1.5em"
                             className="text-lightGreenAlpha"
                         />
-                        <span>{moment(nearestDate).format('MMMM Do')}</span>
+                        <span>
+                            {moment(tourData.startDate).format('MMMM Do')}
+                        </span>
                     </div>
                     <div className="flex gap-2">
                         <HiOutlineFlag
