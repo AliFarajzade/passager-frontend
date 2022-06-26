@@ -57,6 +57,7 @@ const ToursPage: NextPage<IProps> = ({ response, error }) => {
             <ToursPageLayout>
                 <section className="mb-5 rounded-md overflow-hidden bg-white pb-4">
                     <DatePicker />
+                    {/* TODO: Add search by city */}
                     <PriceRange />
                     <SelectDuration />
                     <RatingPicker />
