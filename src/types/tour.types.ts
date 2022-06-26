@@ -13,7 +13,7 @@ export type TTour = {
     images: string[]
     summary: string
     coverImage: string
-    startDates: string[]
+    startDate: string
     description: string
     startLocation: {
         type: string
