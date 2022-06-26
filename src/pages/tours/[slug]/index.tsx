@@ -124,7 +124,7 @@ const TourPage: NextPage<IProps> = ({ response, error }) => {
                     <TourGuides tourGuides={tourData.guides} />
                 </section>
             </TourPageLayout>
-            <TourPageReviews />
+            <TourPageReviews tourID={tourData._id} />
         </>
     )
 }
