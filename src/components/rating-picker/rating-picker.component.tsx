@@ -1,6 +1,24 @@
+import { useRouter } from 'next/router'
+import { ChangeEvent, useEffect, useState } from 'react'
 import ReactStars from 'react-rating-stars-component'
 const RatingPicker: React.FC = () => {
-    const handleChangeRating = (newRating: number) => console.log(newRating)
+    const [min, setMin] = useState<string | undefined>(undefined)
+
+    const router = useRouter()
+
+    const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+        const min = event.target.dataset.min!
+        setMin(min)
+    }
+
+    useEffect(() => {
+        if (!min) return
+        router.push({
+            query: { ...router.query, 'averageRating[gte]': min },
+        })
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [min])
 
     return (
         <div className="p-4 select-none">
@@ -8,13 +26,15 @@ const RatingPicker: React.FC = () => {
             <div className="flex flex-col gap-3 p-4">
                 <div className="flex gap-2 items-center">
                     <input
+                        onChange={handleChange}
+                        data-min={4.5}
                         type="radio"
                         name="radio-2"
                         className="radio radio-primary radio-md"
                     />
                     <ReactStars
                         count={5}
-                        onChange={handleChangeRating}
+                        onChange={() => {}}
                         size={20}
                         activeColor="#7ed56f"
                         edit={false}
@@ -23,13 +43,15 @@ const RatingPicker: React.FC = () => {
                 </div>
                 <div className="flex items-center gap-2">
                     <input
+                        onChange={handleChange}
+                        data-min={4}
                         type="radio"
                         name="radio-2"
                         className="radio radio-primary radio-md"
                     />
                     <ReactStars
                         count={5}
-                        onChange={handleChangeRating}
+                        onChange={() => {}}
                         size={20}
                         activeColor="#7ed56f"
                         edit={false}
@@ -39,13 +61,15 @@ const RatingPicker: React.FC = () => {
                 </div>
                 <div className="flex items-center gap-2">
                     <input
+                        onChange={handleChange}
+                        data-min={3}
                         type="radio"
                         name="radio-2"
                         className="radio radio-primary radio-md"
                     />
                     <ReactStars
                         count={5}
-                        onChange={handleChangeRating}
+                        onChange={() => {}}
                         size={20}
                         activeColor="#7ed56f"
                         edit={false}
@@ -55,13 +79,15 @@ const RatingPicker: React.FC = () => {
                 </div>
                 <div className="flex items-center gap-2">
                     <input
+                        onChange={handleChange}
+                        data-min={2}
                         type="radio"
                         name="radio-2"
                         className="radio radio-primary radio-md"
                     />
                     <ReactStars
                         count={5}
-                        onChange={handleChangeRating}
+                        onChange={() => {}}
                         size={20}
                         activeColor="#7ed56f"
                         edit={false}
@@ -71,13 +97,15 @@ const RatingPicker: React.FC = () => {
                 </div>
                 <div className="flex items-center gap-2">
                     <input
+                        onChange={handleChange}
                         type="radio"
                         name="radio-2"
                         className="radio radio-primary radio-md"
+                        data-min={1}
                     />
                     <ReactStars
                         count={5}
-                        onChange={handleChangeRating}
+                        onChange={() => {}}
                         size={20}
                         activeColor="#7ed56f"
                         edit={false}
