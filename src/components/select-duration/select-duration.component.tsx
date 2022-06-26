@@ -16,8 +16,6 @@ const SelectDuration: React.FC = () => {
         const min = event.target.dataset.min
         const max = event.target.dataset.max
 
-        console.log({ min, max })
-
         setMinMax({ min, max })
     }
 
