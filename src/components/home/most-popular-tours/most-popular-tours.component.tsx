@@ -12,6 +12,7 @@ const cardsData = [
             'Difficulty: easy',
         ],
         price: 297,
+        link: '/tours/the-sea-explorer',
     },
     {
         name: 'The Forest Hiker',
@@ -23,6 +24,7 @@ const cardsData = [
             'Difficulty: medium',
         ],
         price: 497,
+        link: '/tours/the-forest-hiker',
     },
     {
         name: 'The Snow Adventurer',
@@ -35,6 +37,7 @@ const cardsData = [
         ],
 
         price: 897,
+        link: '/tours/the-snow-adventurer',
     },
 ]
 
