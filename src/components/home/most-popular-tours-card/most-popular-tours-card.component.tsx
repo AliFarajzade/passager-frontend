@@ -1,15 +1,31 @@
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+import useMediaQuery from '../../../hooks/use-media-query.hook'
+
 interface IProps {
     cardData: {
         name: string
         details: string[]
         price: number
+        link: string
     }
     index: number
 }
 
 const MostPopularToursCard: React.FC<IProps> = ({ cardData, index }) => {
+    const isLessThan1024px = useMediaQuery('(max-width: 1024px)')
+
+    const router = useRouter()
+
+    const handleClick = () =>
+        isLessThan1024px &&
+        router.push(cardData.link, cardData.link, { scroll: true })
+
     return (
-        <div className="card drop-shadow-2xl max-w-[340px]">
+        <div
+            className="card drop-shadow-2xl max-w-[340px] cursor-pointer lg:cursor-default"
+            onClick={handleClick}
+        >
             <div className="card__side card__side--front">
                 <div
                     className={`card__image card__image--${index} h-[200px] bg-no-repeat bg-cover bg-center`}
@@ -37,10 +53,11 @@ const MostPopularToursCard: React.FC<IProps> = ({ cardData, index }) => {
             >
                 <span className="text-3xl tracking-wide font-light">ONLY</span>
                 <span className="font-light text-5xl">${cardData.price}</span>
-                {/* TODO: Add link */}
-                <button className="btn bg-white shadow-lg rounded-full text-slate-600 border-0 hover:bg-slate-200 ">
-                    More details
-                </button>
+                <Link href={cardData.link}>
+                    <button className="btn bg-white shadow-lg rounded-full text-slate-600 border-0 hover:bg-slate-200 ">
+                        More details
+                    </button>
+                </Link>
             </div>
         </div>
     )
