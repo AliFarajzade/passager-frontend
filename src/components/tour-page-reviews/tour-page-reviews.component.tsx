@@ -1,14 +1,62 @@
 import moment from 'moment'
 import ReactStars from 'react-rating-stars-component'
 
+import debounce from 'lodash.debounce'
 import Image from 'next/image'
+import { useEffect, useState } from 'react'
 import { BiCommentDetail } from 'react-icons/bi'
+import Skeleton from 'react-loading-skeleton'
+import axiosInstance from '../../helpers/axios-instance.helper'
+import useRequest from '../../hooks/use-request.hook'
+import { THTTPResponse } from '../../types/http-response.types'
 import { TReview } from '../../types/review.types'
 
-const reviewsData: TReview[] = []
+const LIMIT = 1
 
-const TourPageReviews: React.FC = () => {
-    const handleChangeRating = (newRating: number) => console.log(newRating)
+interface IProps {
+    tourID: number
+}
+
+const TourPageReviews: React.FC<IProps> = ({ tourID }) => {
+    const [page, setPage] = useState<number>(1)
+    const [reviews, setReviews] = useState<TReview[]>([])
+    const [total, setTotal] = useState<number | undefined>(undefined)
+
+    const [, isLoading, error, doFetch] = useRequest<THTTPResponse<TReview[]>>()
+
+    const handleChangePage = () => {
+        setPage(prevState => prevState + 1)
+    }
+
+    useEffect(() => {
+        const getNewReviews = debounce(async () => {
+            const reviews = await doFetch({
+                axiosInstance,
+                method: 'get',
+                requestConfig: {},
+                url: `/tours/${tourID}/reviews?page=${page}&limit=1&sort=-createdAt`,
+            })
+
+            if (!reviews) return
+
+            setTotal(reviews.total!)
+            setReviews(prevState => [...prevState, ...reviews.data])
+        })
+
+        getNewReviews()
+
+        return () => getNewReviews.cancel()
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [page])
+
+    const isThereMoreComments = error
+        ? true
+        : reviews.length
+        ? total
+            ? page === Math.ceil(total / LIMIT)
+            : false
+        : true
 
     return (
         <div className="flex flex-col gap-4 p-4">
@@ -37,8 +85,12 @@ const TourPageReviews: React.FC = () => {
                 </div>
                 <div className="divider"></div>
                 <div className="flex flex-col gap-12 mb-6">
-                    {reviewsData.length ? (
-                        reviewsData.map(review => (
+                    {isLoading ? (
+                        <div className="w-full h-7">
+                            <Skeleton />
+                        </div>
+                    ) : reviews.length ? (
+                        reviews.map(review => (
                             <div
                                 key={review._id}
                                 className="border-[1px] border-lightGreenAlpha rounded-md shadow-md flex flex-col gap-6 p-5"
@@ -48,7 +100,7 @@ const TourPageReviews: React.FC = () => {
                                         <div className="avatar">
                                             <div className="w-14 rounded-full ring ring-primary ring-offset-base-100 ring-offset-1">
                                                 <Image
-                                                    src={review.user.photo}
+                                                    src={`/${review.user.photo}`}
                                                     alt={review.user.name}
                                                     width="100%"
                                                     height="100%"
@@ -75,7 +127,7 @@ const TourPageReviews: React.FC = () => {
                                         </div>
                                         <ReactStars
                                             count={5}
-                                            onChange={handleChangeRating}
+                                            onChange={() => {}}
                                             size={20}
                                             activeColor="#7ed56f"
                                             edit={false}
@@ -93,8 +145,12 @@ const TourPageReviews: React.FC = () => {
                     )}
                 </div>
                 <div className="mx-auto text-center">
-                    <button className="btn btn-primary  w-[150px] rounded-full">
-                        Load more
+                    <button
+                        onClick={handleChangePage}
+                        className="btn btn-primary w-[150px] rounded-full"
+                        disabled={isThereMoreComments}
+                    >
+                        {isThereMoreComments ? 'No more comments' : 'Load more'}
                     </button>
                 </div>
             </div>
