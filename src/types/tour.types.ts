@@ -1,5 +1,12 @@
 import { TGuide } from './guide.types'
 
+export type TLocation = {
+    type: string
+    coordinates: number[]
+    description: string
+    day: number
+}
+
 export type TTour = {
     _id: number
     name: string
@@ -15,18 +22,8 @@ export type TTour = {
     coverImage: string
     startDate: string
     description: string
-    startLocation: {
-        type: string
-        coordinates: number[]
-        address: string
-        description: string
-    }
-    locations: {
-        type: string
-        coordinates: number[]
-        description: string
-        day: number
-    }[]
+    startLocation: TLocation
+    locations: TLocation[]
     slug: string
     guides: TGuide[]
     discounetedPrice?: number
