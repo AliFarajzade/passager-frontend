@@ -50,15 +50,14 @@ const TourLocations: React.FC<IProps> = ({ allLocations }) => {
             </div>
             <div className="flex gap-x-2 gap-y-4 flex-wrap items-center">
                 {allLocations.map(location => (
-                    // TODO: Fix for long text small screen
                     <button
                         key={location.description}
-                        className="btn btn-ghost btn-outline flex gap-1  items-center text-center text-lg capitalize flex-grow"
+                        className="btn btn-ghost btn-outline flex gap-1 text-md  items-center text-center md:text-lg capitalize flex-grow max-w-full leading-5"
                         onClick={() => showLocationOnMap(location.coordinates)}
                     >
                         <WiDaySunny
                             size="2em"
-                            className="text-lightGreenAlpha"
+                            className="text-lightGreenAlpha hidden sm:inline-block"
                         />
                         {location.day === 0
                             ? 'Start location: '
