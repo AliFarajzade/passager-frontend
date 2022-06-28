@@ -269,6 +269,7 @@ span.swiper-pagination-bullet.swiper-pagination-bullet-active {
 .swiper-button-prev,
 .swiper-button-next {
     color: $color-primary-light !important;
+    transform: scale(0.7);
 }
 
 //Rgb effect
