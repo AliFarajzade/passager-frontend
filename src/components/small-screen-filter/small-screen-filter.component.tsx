@@ -5,6 +5,7 @@ import DatePicker from '../date-picker/date-picker.component'
 import DifficultyPicker from '../difficulty-picker/difficulty-picker.component'
 import PriceRange from '../price-range/price-range.component'
 import RatingPicker from '../rating-picker/rating-picker.component'
+import SearchCity from '../search-city/search-city.component'
 import SelectDuration from '../select-duration/select-duration.component'
 
 const SmallerScreenFilter: React.FC = () => {
@@ -30,6 +31,7 @@ const SmallerScreenFilter: React.FC = () => {
                 <div className="fixed inset-0 bg-white z-50  overflow-scroll">
                     <div className="pb-24">
                         <DatePicker />
+                        <SearchCity />
                         <PriceRange />
                         <SelectDuration />
                         <RatingPicker />

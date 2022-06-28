@@ -9,6 +9,7 @@ import ToursPageLayout from '../../components/layout/tours-page-layout.component
 import NotFoundTour from '../../components/not-found-tours/not-found-tours.component'
 import PriceRange from '../../components/price-range/price-range.component'
 import RatingPicker from '../../components/rating-picker/rating-picker.component'
+import SearchCity from '../../components/search-city/search-city.component'
 import SelectDuration from '../../components/select-duration/select-duration.component'
 import SmallerScreenFilter from '../../components/small-screen-filter/small-screen-filter.component'
 import TourCard from '../../components/tour-card/tour-card.component'
@@ -57,7 +58,7 @@ const ToursPage: NextPage<IProps> = ({ response, error }) => {
             <ToursPageLayout>
                 <section className="mb-5 rounded-md overflow-hidden bg-white pb-4">
                     <DatePicker />
-                    {/* TODO: Add search by city */}
+                    <SearchCity />
                     <PriceRange />
                     <SelectDuration />
                     <RatingPicker />
