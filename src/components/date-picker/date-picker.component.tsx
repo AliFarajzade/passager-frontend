@@ -11,7 +11,9 @@ const DatePicker: React.FC = () => {
     const [date, setDate] = useState<Range[]>([
         {
             startDate: undefined,
-            endDate: undefined,
+            endDate: new Date(
+                new Date().setFullYear(new Date().getFullYear() + 1)
+            ),
             key: 'selection',
         },
     ])
