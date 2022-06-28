@@ -41,7 +41,6 @@ const guidesData = [
 ]
 
 const Home: NextPage = () => {
-    // TODO: Add sidebar
     return (
         <div className="lg:p-8 selection:bg-lightGreenAlpha selection:text-white">
             <div className="bg-white">
