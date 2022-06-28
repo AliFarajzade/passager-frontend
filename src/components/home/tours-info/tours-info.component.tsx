@@ -31,7 +31,6 @@ const ToursInfo = () => {
             <div className="grid grid-cols-1  md:grid-cols-2 gap-5 pt-24">
                 <div className="basis-2/4 space-y-12">
                     <div className="space-y-4 prose">
-                        {/* TODO: Change paragraph <text className=""></text> */}
                         <h4>YOU&apos;RE GOING TO FALL IN LOVE WITH NATURE</h4>
                         <p>
                             It is not so much for its beauty that the forest
