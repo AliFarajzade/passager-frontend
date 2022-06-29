@@ -3,4 +3,5 @@ export type THTTPResponse<DataType> = {
     total?: number
     results?: number
     data: DataType
+    token?: string
 }
