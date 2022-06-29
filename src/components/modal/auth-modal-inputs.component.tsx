@@ -119,20 +119,20 @@ const AuthModalnputs: React.FC<IProps> = ({
                     </span>
                 )}
                 <input
-                    value={inputValues.confirmPassowrd}
+                    value={inputValues.confirmPassword}
                     onChange={handleInputChange}
-                    name="confirmPassowrd"
+                    name="confirmPassword"
                     type="password"
                     placeholder="Confirm Passowrd"
                     className={`input input-bordered w-full ${
-                        inputErrors.confirmPassowrd
+                        inputErrors.confirmPassword
                             ? 'border-error'
-                            : inputValues.confirmPassowrd
+                            : inputValues.confirmPassword
                             ? 'border-success'
                             : ''
                     }`}
                 />
-                {inputErrors.confirmPassowrd && (
+                {inputErrors.confirmPassword && (
                     <span className="text-sm text-red-500 text-left">
                         Passwords do not match.
                     </span>

@@ -13,14 +13,14 @@ export type TInputValues = {
     name: string
     email: string
     password: string
-    confirmPassowrd: string
+    confirmPassword: string
 }
 
 export type TInputErrors = {
     name: boolean
     email: boolean
     password: boolean
-    confirmPassowrd: boolean
+    confirmPassword: boolean
 }
 
 const AuthModal: React.FC = () => {
@@ -28,14 +28,14 @@ const AuthModal: React.FC = () => {
         useRecoilState(authModalStateAtom)
 
     const [inputValues, setInputValues] = useState<TInputValues>({
-        confirmPassowrd: '',
+        confirmPassword: '',
         email: '',
         name: '',
         password: '',
     })
 
     const [inputErrors, setInputErrors] = useState<TInputErrors>({
-        confirmPassowrd: false,
+        confirmPassword: false,
         password: false,
         email: false,
         name: false,
@@ -78,28 +78,28 @@ const AuthModal: React.FC = () => {
                     ...inputErrors,
                     [inputName]: false,
                 })
-        else if (inputName === 'confirmPassowrd')
+        else if (inputName === 'confirmPassword')
             if (inputValue !== inputValues.password)
                 setInputErrors({
                     ...inputErrors,
-                    confirmPassowrd: true,
+                    confirmPassword: true,
                 })
             else
                 setInputErrors({
                     ...inputErrors,
-                    confirmPassowrd: false,
+                    confirmPassword: false,
                 })
     }
 
     const resetInputs = () => {
         setInputValues({
-            confirmPassowrd: '',
+            confirmPassword: '',
             email: '',
             name: '',
             password: '',
         })
         setInputErrors({
-            confirmPassowrd: false,
+            confirmPassword: false,
             password: false,
             email: false,
             name: false,
