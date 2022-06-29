@@ -32,7 +32,7 @@ const TourPageReviews: React.FC<IProps> = ({ tourID }) => {
         const getNewReviews = debounce(async () => {
             const reviews = await doFetch({
                 axiosInstance,
-                method: 'get',
+                method: 'GET',
                 requestConfig: {},
                 url: `/tours/${tourID}/reviews?page=${page}&limit=1&sort=-createdAt`,
             })
