@@ -21,3 +21,8 @@ export type TGetMeResponse = {
         __v: number
     }
 }
+
+export type TSignInResponse = {
+    status: string
+    token: string
+}
