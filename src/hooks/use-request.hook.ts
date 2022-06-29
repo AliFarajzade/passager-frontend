@@ -11,7 +11,7 @@ type TAxiosConfig = {
 const useRequest = <DataType>(): [
     DataType | null,
     boolean,
-    unknown | null,
+    any | null,
     (configObject: TAxiosConfig) => Promise<undefined | DataType>
 ] => {
     const [data, setData] = useState<DataType | null>(null)
@@ -23,7 +23,9 @@ const useRequest = <DataType>(): [
         const ctrl = new AbortController()
 
         setController(ctrl)
+
         setError(null)
+        setData(null)
 
         const { axiosInstance, method, requestConfig, url } = configObject
 
@@ -40,7 +42,7 @@ const useRequest = <DataType>(): [
             setData(response.data)
 
             return response.data
-        } catch (error) {
+        } catch (error: any) {
             setError(error)
         } finally {
             setIsLoading(false)
