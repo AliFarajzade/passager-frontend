@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import toast from 'react-hot-toast'
 import { FaGoogle } from 'react-icons/fa'
 import { useRecoilState } from 'recoil'
 import axiosInstance from '../../helpers/axios-instance.helper'
@@ -163,11 +164,11 @@ const AuthModal: React.FC = () => {
             },
         })
 
-        // TODO: Add toast notification.
         if (response?.token) {
             localStorage.setItem('token', response.token)
             getMe(response.token)
             closeModal()
+            toast.success('Successfully signed up!')
         }
     }
 
@@ -193,11 +194,11 @@ const AuthModal: React.FC = () => {
             },
         })
 
-        // TODO: Add toast notification.
         if (response?.token) {
             localStorage.setItem('token', response.token)
             getMe(response.token)
             closeModal()
+            toast.success('Welcome back!')
         }
     }
 

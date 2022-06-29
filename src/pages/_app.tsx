@@ -2,6 +2,7 @@ import type { AppProps } from 'next/app'
 import Router from 'next/router'
 import NProgress from 'nprogress'
 import { useEffect } from 'react'
+import { Toaster } from 'react-hot-toast'
 import { RecoilRoot } from 'recoil'
 import Layout from '../components/layout/layout.component'
 import '../styles/globals.scss'
@@ -26,6 +27,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <RecoilRoot>
             <Layout>
                 <Component {...pageProps} />
+                <Toaster />
             </Layout>
         </RecoilRoot>
     )
