@@ -39,11 +39,24 @@ const AuthModal: React.FC = () => {
     const [, isSignUpLoading, signUpError, doSignUp] =
         useRequest<THTTPResponse<TSignUpResponse>>()
 
-    const [, isSigninLoading, signIpError, doSignIp] =
+    const [, isSigninLoading, signInError, doSignIn] =
         useRequest<TSignInResponse>()
 
-    const isLoading = isSignUpLoading
-    const isError = signUpError
+    const isLoading = isSignUpLoading || isSigninLoading
+    const isError = signUpError || signInError
+    const errorMessage = (() => {
+        if (signUpError) {
+            if (
+                signUpError.response.data.message.startsWith(
+                    'Duplicate field error'
+                )
+            )
+                return 'Email already exists.'
+            return 'Something went wrong.'
+        } else if (signInError) {
+            return signInError.response.data.message
+        } else return 'Something went wrong.'
+    })()
 
     const [inputValues, setInputValues] = useState<TInputValues>({
         confirmPassword: '',
@@ -182,7 +195,7 @@ const AuthModal: React.FC = () => {
         )
             return
 
-        const response = await doSignIp({
+        const response = await doSignIn({
             url: '/users/enter',
             axiosInstance,
             method: 'POST',
@@ -205,6 +218,8 @@ const AuthModal: React.FC = () => {
     useEffect(() => {
         return () => resetInputs()
     }, [])
+
+    console.log(signInError)
 
     return (
         <>
@@ -246,16 +261,7 @@ const AuthModal: React.FC = () => {
                         <div className="flex flex-col gap-3 mx-auto w-5/6 max-w-xs">
                             <>
                                 {isError && (
-                                    <AuthModalError
-                                        message={
-                                            signUpError.response.data.message.startsWith(
-                                                'Duplicate field error'
-                                            )
-                                                ? 'Email already exists'
-                                                : (signUpError.response.data
-                                                      .message as string)
-                                        }
-                                    />
+                                    <AuthModalError message={errorMessage} />
                                 )}
                                 <AuthModalnputs
                                     modalView={authModalState.view}
