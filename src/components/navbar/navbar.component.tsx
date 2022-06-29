@@ -15,6 +15,8 @@ const Navbar = () => {
     useEffect(() => {
         const token = localStorage.getItem('token')
         if (token) getMe(token)
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (

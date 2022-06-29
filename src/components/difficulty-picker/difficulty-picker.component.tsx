@@ -17,6 +17,8 @@ const DifficultyPicker: React.FC = () => {
         router.push({
             query: { ...router.query, difficulty },
         })
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [difficulty])
 
     return (
