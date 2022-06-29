@@ -1,9 +1,9 @@
-import { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
+import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { useEffect, useState } from 'react'
 
 type TAxiosConfig = {
     axiosInstance: AxiosInstance
-    method: 'get' | 'post' | 'patch' | 'put' | 'delete'
+    method: 'GET' | 'POST' | 'PATCH' | 'PUT' | 'DELETE'
     url: string
     requestConfig: AxiosRequestConfig
 }
@@ -21,16 +21,24 @@ const useRequest = <DataType>(): [
 
     const doRequest = async (configObject: TAxiosConfig) => {
         const ctrl = new AbortController()
+
         setController(ctrl)
         setError(null)
+
         const { axiosInstance, method, requestConfig, url } = configObject
+
         try {
             setIsLoading(true)
-            const response = (await axiosInstance[method](url, {
+
+            const response = await axiosInstance({
+                url,
+                method: method.toLowerCase(),
                 signal: ctrl.signal,
                 ...requestConfig,
-            })) as AxiosResponse<DataType, any>
+            })
+
             setData(response.data)
+
             return response.data
         } catch (error) {
             setError(error)
