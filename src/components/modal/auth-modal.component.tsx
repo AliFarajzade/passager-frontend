@@ -1,12 +1,18 @@
 import { useEffect, useState } from 'react'
 import { FaGoogle } from 'react-icons/fa'
 import { useRecoilState } from 'recoil'
+import axiosInstance from '../../helpers/axios-instance.helper'
 import {
     emailRegex,
     onlyASCIIAndWhiteSpaceOrNothingRegex,
     passwordRegex,
 } from '../../helpers/regex.helper'
+import useGetMe from '../../hooks/use-get-me.hook'
+import useRequest from '../../hooks/use-request.hook'
 import authModalStateAtom from '../../recoil/atoms/auth-modal.atom'
+import { TSignUpResponse } from '../../types/auth.types'
+import { THTTPResponse } from '../../types/http-response.types'
+import AuthModalError from './auth-modal-error.component'
 import AuthModalnputs from './auth-modal-inputs.component'
 
 export type TInputValues = {
@@ -26,6 +32,14 @@ export type TInputErrors = {
 const AuthModal: React.FC = () => {
     const [authModalState, setAuthModalState] =
         useRecoilState(authModalStateAtom)
+
+    const [, getMe] = useGetMe()
+
+    const [, isSignUpLoading, signUpError, doSignUp] =
+        useRequest<THTTPResponse<TSignUpResponse>>()
+
+    const isLoading = isSignUpLoading
+    const isError = signUpError
 
     const [inputValues, setInputValues] = useState<TInputValues>({
         confirmPassword: '',
@@ -107,6 +121,8 @@ const AuthModal: React.FC = () => {
     }
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        // Dont let change state on performing request.
+        if (isLoading) return
         checkForValidation(e.target.name, e.target.value)
         setInputValues({ ...inputValues, [e.target.name]: e.target.value })
     }
@@ -117,8 +133,38 @@ const AuthModal: React.FC = () => {
     }
 
     const changeAuthModalState = (state: 'signUp' | 'signIn' | 'forgot') => {
+        // Dont let change state on performing request.
+        if (isLoading) return
         setAuthModalState(prevState => ({ ...prevState, view: state }))
         resetInputs()
+    }
+
+    const handleSignUp = async () => {
+        if (
+            Object.values(inputErrors).some(value => value) ||
+            Object.values(inputValues).some(value => !value)
+        )
+            return
+
+        const response = await doSignUp({
+            url: '/users/register',
+            axiosInstance,
+            method: 'POST',
+            requestConfig: {
+                data: {
+                    name: inputValues.name,
+                    email: inputValues.email,
+                    password: inputValues.password,
+                    confirmPassword: inputValues.confirmPassword,
+                },
+            },
+        })
+
+        if (response?.token) {
+            localStorage.setItem('token', response.token)
+            getMe(response.token)
+            closeModal()
+        }
     }
 
     useEffect(() => {
@@ -148,7 +194,10 @@ const AuthModal: React.FC = () => {
                         {(authModalState.view === 'signIn' ||
                             authModalState.view === 'signUp') && (
                             <>
-                                <button className="btn border-none text-white bg-red-500 flex items-center">
+                                <button
+                                    disabled={isLoading}
+                                    className="btn border-none text-white bg-red-500 flex items-center"
+                                >
                                     <FaGoogle className="mr-2" size="15px" />
                                     Sing{' '}
                                     {authModalState.view === 'signIn'
@@ -160,97 +209,105 @@ const AuthModal: React.FC = () => {
                             </>
                         )}
                         <div className="flex flex-col gap-3 mx-auto w-5/6 max-w-xs">
-                            {/* Error alert */}
-                            <div className="hidden alert alert-error shadow-lg mb-4">
-                                <div>
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        className="stroke-current flex-shrink-0 h-6 w-6"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                    >
-                                        <path
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            strokeWidth="2"
-                                            d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
-                                        />
-                                    </svg>
-                                    <span>
-                                        Error! Task failed successfully.
-                                    </span>
-                                </div>
-                            </div>
-                            <AuthModalnputs
-                                modalView={authModalState.view}
-                                inputValues={inputValues}
-                                inputErrors={inputErrors}
-                                handleInputChange={handleInputChange}
-                            />
-                            <button className="btn btn-primary text-white mt-4">
-                                {authModalState.view === 'signIn' && 'Sign In'}
-                                {authModalState.view === 'signUp' && 'Sign Up'}
-                                {authModalState.view === 'forgot' &&
-                                    'Reset Password'}
-                            </button>
+                            <>
+                                {isError && (
+                                    <AuthModalError
+                                        message={
+                                            signUpError.response.data.message.startsWith(
+                                                'Duplicate field error'
+                                            )
+                                                ? 'Email already exists'
+                                                : (signUpError.response.data
+                                                      .message as string)
+                                        }
+                                    />
+                                )}
+                                <AuthModalnputs
+                                    modalView={authModalState.view}
+                                    inputValues={inputValues}
+                                    inputErrors={inputErrors}
+                                    handleInputChange={handleInputChange}
+                                />
+                                <button
+                                    onClick={() => {
+                                        if (isLoading) return
+                                        if (authModalState.view === 'signUp')
+                                            handleSignUp()
+                                    }}
+                                    className={`btn btn-primary text-white mt-4 ${
+                                        isLoading && 'loading'
+                                    }`}
+                                >
+                                    {authModalState.view === 'signIn' &&
+                                        'Sign In'}
+                                    {authModalState.view === 'signUp' &&
+                                        'Sign Up'}
+                                    {authModalState.view === 'forgot' &&
+                                        'Reset Password'}
+                                </button>
 
-                            <div className="pt-5 space-y-4 text-gray-600">
-                                {authModalState.view === 'signIn' && (
-                                    <>
+                                <div className="pt-5 space-y-4 text-gray-600">
+                                    {authModalState.view === 'signIn' && (
+                                        <>
+                                            <h5>
+                                                New to Passager?{' '}
+                                                <span
+                                                    className="link link-secondary"
+                                                    onClick={() =>
+                                                        changeAuthModalState(
+                                                            'signUp'
+                                                        )
+                                                    }
+                                                >
+                                                    Sign Up!
+                                                </span>
+                                            </h5>
+                                            <h5>
+                                                Forgot your password?{' '}
+                                                <span
+                                                    className="link link-secondary"
+                                                    onClick={() =>
+                                                        changeAuthModalState(
+                                                            'forgot'
+                                                        )
+                                                    }
+                                                >
+                                                    Reset Password.
+                                                </span>
+                                            </h5>
+                                        </>
+                                    )}
+                                    {authModalState.view === 'signUp' && (
                                         <h5>
-                                            New to Passager?{' '}
+                                            Already registered?{' '}
                                             <span
                                                 className="link link-secondary"
                                                 onClick={() =>
                                                     changeAuthModalState(
-                                                        'signUp'
+                                                        'signIn'
                                                     )
                                                 }
                                             >
-                                                Sign Up!
+                                                Sign In!
                                             </span>
                                         </h5>
+                                    )}
+                                    {authModalState.view === 'forgot' && (
                                         <h5>
-                                            Forgot your password?{' '}
                                             <span
                                                 className="link link-secondary"
                                                 onClick={() =>
                                                     changeAuthModalState(
-                                                        'forgot'
+                                                        'signIn'
                                                     )
                                                 }
                                             >
-                                                Reset Password.
+                                                Sign In!
                                             </span>
                                         </h5>
-                                    </>
-                                )}
-                                {authModalState.view === 'signUp' && (
-                                    <h5>
-                                        Already registered?{' '}
-                                        <span
-                                            className="link link-secondary"
-                                            onClick={() =>
-                                                changeAuthModalState('signIn')
-                                            }
-                                        >
-                                            Sign In!
-                                        </span>
-                                    </h5>
-                                )}
-                                {authModalState.view === 'forgot' && (
-                                    <h5>
-                                        <span
-                                            className="link link-secondary"
-                                            onClick={() =>
-                                                changeAuthModalState('signIn')
-                                            }
-                                        >
-                                            Sign In!
-                                        </span>
-                                    </h5>
-                                )}
-                            </div>
+                                    )}
+                                </div>
+                            </>
                         </div>
                     </div>
                 </div>
