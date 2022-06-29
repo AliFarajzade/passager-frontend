@@ -2,7 +2,6 @@ import moment from 'moment'
 import ReactStars from 'react-rating-stars-component'
 
 import debounce from 'lodash.debounce'
-import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import { BiCommentDetail } from 'react-icons/bi'
 import Skeleton from 'react-loading-skeleton'
@@ -10,6 +9,8 @@ import axiosInstance from '../../helpers/axios-instance.helper'
 import useRequest from '../../hooks/use-request.hook'
 import { THTTPResponse } from '../../types/http-response.types'
 import { TReview } from '../../types/review.types'
+import NoAvatar from '../no-avatar/no-avatar.component'
+import UserAvatar from '../user-avatar/user-avatar.component'
 
 const LIMIT = 1
 
@@ -97,22 +98,15 @@ const TourPageReviews: React.FC<IProps> = ({ tourID }) => {
                             >
                                 <div className="flex items-center gap-4">
                                     {review.user.photo ? (
-                                        <div className="avatar">
-                                            <div className="w-14 rounded-full ring ring-primary ring-offset-base-100 ring-offset-1">
-                                                <Image
-                                                    src={`/${review.user.photo}`}
-                                                    alt={review.user.name}
-                                                    width="100%"
-                                                    height="100%"
-                                                />
-                                            </div>
+                                        <div className="w-14">
+                                            <UserAvatar
+                                                name={review.user.name}
+                                                photo={review.user.photo}
+                                            />
                                         </div>
                                     ) : (
-                                        <div className="w-14 h-14 rounded-full  flex justify-center items-center bg-lightGreen font-bold text-white text-lg flex-shrink-0">
-                                            {review.user.name
-                                                .split(' ')
-                                                .map(name => name[0])
-                                                .join('')}
+                                        <div className="w-14 h-14">
+                                            <NoAvatar name={review.user.name} />
                                         </div>
                                     )}
                                     <div>
