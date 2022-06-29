@@ -8,7 +8,7 @@ import NoAvatar from '../no-avatar/no-avatar.component'
 import UserAvatar from '../user-avatar/user-avatar.component'
 
 const Navbar = () => {
-    const [userState, getMe] = useGetMe()
+    const [userState, getMe, signOut] = useGetMe()
 
     const { pathname } = useRouter()
 
@@ -106,7 +106,7 @@ const Navbar = () => {
                             <li>
                                 <label>My Tours</label>
                             </li>
-                            <li>
+                            <li onClick={signOut}>
                                 <label>Sign out</label>
                             </li>
                         </ul>
