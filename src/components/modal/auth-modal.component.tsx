@@ -1,16 +1,130 @@
+import { useEffect, useState } from 'react'
 import { FaGoogle } from 'react-icons/fa'
 import { useRecoilState } from 'recoil'
+import {
+    emailRegex,
+    onlyASCIIAndWhiteSpaceOrNothingRegex,
+    passwordRegex,
+} from '../../helpers/regex.helper'
 import authModalStateAtom from '../../recoil/atoms/auth-modal.atom'
 import AuthModalnputs from './auth-modal-inputs.component'
+
+export type TInputValues = {
+    name: string
+    email: string
+    password: string
+    confirmPassowrd: string
+}
+
+export type TInputErrors = {
+    name: boolean
+    email: boolean
+    password: boolean
+    confirmPassowrd: boolean
+}
+
 const AuthModal: React.FC = () => {
     const [authModalState, setAuthModalState] =
         useRecoilState(authModalStateAtom)
 
-    const closeModal = () =>
-        setAuthModalState(prevState => ({ ...prevState, open: false }))
+    const [inputValues, setInputValues] = useState<TInputValues>({
+        confirmPassowrd: '',
+        email: '',
+        name: '',
+        password: '',
+    })
 
-    const changeAuthModalState = (state: 'signUp' | 'signIn' | 'forgot') =>
+    const [inputErrors, setInputErrors] = useState<TInputErrors>({
+        confirmPassowrd: false,
+        password: false,
+        email: false,
+        name: false,
+    })
+
+    const checkForValidation = (inputName: string, inputValue: string) => {
+        if (inputName === 'name')
+            if (
+                inputValue.length < 2 ||
+                !onlyASCIIAndWhiteSpaceOrNothingRegex.test(inputValue)
+            )
+                setInputErrors({
+                    ...inputErrors,
+                    [inputName]: true,
+                })
+            else
+                setInputErrors({
+                    ...inputErrors,
+                    [inputName]: false,
+                })
+        else if (inputName === 'email')
+            if (!emailRegex.test(inputValue))
+                setInputErrors({
+                    ...inputErrors,
+                    [inputName]: true,
+                })
+            else
+                setInputErrors({
+                    ...inputErrors,
+                    [inputName]: false,
+                })
+        else if (inputName === 'password')
+            if (!passwordRegex.test(inputValue))
+                setInputErrors({
+                    ...inputErrors,
+                    [inputName]: true,
+                })
+            else
+                setInputErrors({
+                    ...inputErrors,
+                    [inputName]: false,
+                })
+        else if (inputName === 'confirmPassowrd')
+            if (inputValue !== inputValues.password)
+                setInputErrors({
+                    ...inputErrors,
+                    confirmPassowrd: true,
+                })
+            else
+                setInputErrors({
+                    ...inputErrors,
+                    confirmPassowrd: false,
+                })
+    }
+
+    const resetInputs = () => {
+        setInputValues({
+            confirmPassowrd: '',
+            email: '',
+            name: '',
+            password: '',
+        })
+        setInputErrors({
+            confirmPassowrd: false,
+            password: false,
+            email: false,
+            name: false,
+        })
+    }
+
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        checkForValidation(e.target.name, e.target.value)
+        setInputValues({ ...inputValues, [e.target.name]: e.target.value })
+    }
+
+    const closeModal = () => {
+        resetInputs()
+        setAuthModalState(prevState => ({ ...prevState, open: false }))
+    }
+
+    const changeAuthModalState = (state: 'signUp' | 'signIn' | 'forgot') => {
         setAuthModalState(prevState => ({ ...prevState, view: state }))
+        resetInputs()
+    }
+
+    useEffect(() => {
+        return () => resetInputs()
+    }, [])
+
     return (
         <>
             <div className={authModalState.open ? 'modal modal-open' : 'modal'}>
@@ -67,7 +181,12 @@ const AuthModal: React.FC = () => {
                                     </span>
                                 </div>
                             </div>
-                            <AuthModalnputs modalView={authModalState.view} />
+                            <AuthModalnputs
+                                modalView={authModalState.view}
+                                inputValues={inputValues}
+                                inputErrors={inputErrors}
+                                handleInputChange={handleInputChange}
+                            />
                             <button className="btn btn-primary text-white mt-4">
                                 {authModalState.view === 'signIn' && 'Sign In'}
                                 {authModalState.view === 'signUp' && 'Sign Up'}
