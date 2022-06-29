@@ -4,6 +4,8 @@ import { useEffect } from 'react'
 import useGetMe from '../../hooks/use-get-me.hook'
 import AuthButtons from '../auth-buttons/auth-buttons.component'
 import LoadingSpinner from '../loading-spinner/loading-spinner.component'
+import NoAvatar from '../no-avatar/no-avatar.component'
+import UserAvatar from '../user-avatar/user-avatar.component'
 
 const Navbar = () => {
     const [userState, getMe] = useGetMe()
@@ -48,7 +50,65 @@ const Navbar = () => {
                         <LoadingSpinner />
                     </div>
                 ) : userState.user ? (
-                    <div>{userState.user?.name}</div>
+                    <div className="dropdown dropdown-end">
+                        {userState.user.photo ? (
+                            <div
+                                className="flex gap-2 items-center cursor-pointer select-none"
+                                tabIndex={0}
+                            >
+                                <div className="w-12 h-12">
+                                    <UserAvatar
+                                        name={userState.user.name}
+                                        photo={userState.user.photo}
+                                    />
+                                </div>
+                                <div>
+                                    <svg
+                                        tabIndex={0}
+                                        className="fill-current"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="20"
+                                        height="20"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
+                                    </svg>
+                                </div>
+                            </div>
+                        ) : (
+                            <div
+                                className="flex gap-2 items-center cursor-pointer select-none"
+                                tabIndex={0}
+                            >
+                                <div className="w-12 h-12">
+                                    <NoAvatar name={userState.user.name} />
+                                </div>
+                                <div>
+                                    <svg
+                                        tabIndex={0}
+                                        className="fill-current"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="20"
+                                        height="20"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
+                                    </svg>
+                                </div>
+                            </div>
+                        )}
+                        <ul
+                            tabIndex={0}
+                            className="dropdown-content menu p-2 shadow rounded-box w-52 bg-slate-100 dark:bg-white"
+                        >
+                            <li>
+                                <label>My Tours</label>
+                            </li>
+                            <li>
+                                <label>Sign out</label>
+                            </li>
+                        </ul>
+                    </div>
                 ) : (
                     <AuthButtons />
                 )}
