@@ -1,8 +1,6 @@
 import type { GetServerSideProps, NextPage } from 'next'
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
-import { toast } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
+import { useState } from 'react'
 import DatePicker from '../../components/date-picker/date-picker.component'
 import DifficultyPicker from '../../components/difficulty-picker/difficulty-picker.component'
 import ToursPageLayout from '../../components/layout/tours-page-layout.component'
@@ -46,10 +44,6 @@ const ToursPage: NextPage<IProps> = ({ response, error }) => {
     const initialPage = router.query.page ?? 1
 
     const [page, setPage] = useState<number>(+initialPage)
-
-    useEffect(() => {
-        if (error && !response) toast.error('Cannot get tours.')
-    }, [error, response])
 
     return (
         <>
