@@ -1,25 +1,19 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useSetRecoilState } from 'recoil'
-import authModalStateAtom from '../../recoil/atoms/auth-modal.atom'
+import { useEffect } from 'react'
+import useGetMe from '../../hooks/use-get-me.hook'
+import AuthButtons from '../auth-buttons/auth-buttons.component'
+import LoadingSpinner from '../loading-spinner/loading-spinner.component'
 
 const Navbar = () => {
-    const setAuthModalState = useSetRecoilState(authModalStateAtom)
-
-    const openAuthModalAsSignIn = () =>
-        setAuthModalState(prevState => ({
-            ...prevState,
-            open: true,
-            view: 'signIn',
-        }))
-    const openAuthModalAsSignUp = () =>
-        setAuthModalState(prevState => ({
-            ...prevState,
-            open: true,
-            view: 'signUp',
-        }))
+    const [userState, getMe] = useGetMe()
 
     const { pathname } = useRouter()
+
+    useEffect(() => {
+        const token = localStorage.getItem('token')
+        if (token) getMe(token)
+    }, [])
 
     return (
         <div className="bg-base-100 border-b-2 navbar">
@@ -49,43 +43,15 @@ const Navbar = () => {
             </div>
 
             <div className="navbar-end space-x-4">
-                <button
-                    className="btn btn-outline w-max hidden sm:flex"
-                    onClick={openAuthModalAsSignIn}
-                >
-                    Sign In
-                </button>
-                <button
-                    className="btn btn-primary text-white w-max hidden sm:flex"
-                    onClick={openAuthModalAsSignUp}
-                >
-                    Sign Up
-                </button>
-
-                <div className="dropdown dropdown-end sm:hidden">
-                    <label tabIndex={0} className="btn btn-ghost m-1 mr-3">
-                        <svg
-                            className="fill-current"
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="20"
-                            height="20"
-                            viewBox="0 0 24 24"
-                        >
-                            <path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
-                        </svg>
-                    </label>
-                    <ul
-                        tabIndex={0}
-                        className="dropdown-content menu p-2 shadow rounded-box w-52 bg-slate-100 dark:bg-white"
-                    >
-                        <li>
-                            <label htmlFor="my-modal-3">Sign In</label>
-                        </li>
-                        <li>
-                            <label htmlFor="my-modal-3">Sign Up</label>
-                        </li>
-                    </ul>
-                </div>
+                {userState.isLoading ? (
+                    <div className="flex justify-center items-center w-[48px] h-[48px]">
+                        <LoadingSpinner />
+                    </div>
+                ) : userState.user ? (
+                    <div>{userState.user?.name}</div>
+                ) : (
+                    <AuthButtons />
+                )}
             </div>
         </div>
     )
