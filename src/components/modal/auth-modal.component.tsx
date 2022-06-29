@@ -10,7 +10,7 @@ import {
 import useGetMe from '../../hooks/use-get-me.hook'
 import useRequest from '../../hooks/use-request.hook'
 import authModalStateAtom from '../../recoil/atoms/auth-modal.atom'
-import { TSignUpResponse } from '../../types/auth.types'
+import { TSignInResponse, TSignUpResponse } from '../../types/auth.types'
 import { THTTPResponse } from '../../types/http-response.types'
 import AuthModalError from './auth-modal-error.component'
 import AuthModalnputs from './auth-modal-inputs.component'
@@ -37,6 +37,9 @@ const AuthModal: React.FC = () => {
 
     const [, isSignUpLoading, signUpError, doSignUp] =
         useRequest<THTTPResponse<TSignUpResponse>>()
+
+    const [, isSigninLoading, signIpError, doSignIp] =
+        useRequest<TSignInResponse>()
 
     const isLoading = isSignUpLoading
     const isError = signUpError
@@ -160,6 +163,37 @@ const AuthModal: React.FC = () => {
             },
         })
 
+        // TODO: Add toast notification.
+        if (response?.token) {
+            localStorage.setItem('token', response.token)
+            getMe(response.token)
+            closeModal()
+        }
+    }
+
+    const handleSignIn = async () => {
+        if (
+            Object.values(inputErrors).some(value => value) ||
+            Object.values({
+                email: inputValues.email,
+                password: inputValues.password,
+            }).some(value => !value)
+        )
+            return
+
+        const response = await doSignIp({
+            url: '/users/enter',
+            axiosInstance,
+            method: 'POST',
+            requestConfig: {
+                data: {
+                    email: inputValues.email,
+                    password: inputValues.password,
+                },
+            },
+        })
+
+        // TODO: Add toast notification.
         if (response?.token) {
             localStorage.setItem('token', response.token)
             getMe(response.token)
@@ -231,8 +265,13 @@ const AuthModal: React.FC = () => {
                                 <button
                                     onClick={() => {
                                         if (isLoading) return
+
                                         if (authModalState.view === 'signUp')
                                             handleSignUp()
+                                        else if (
+                                            authModalState.view === 'signIn'
+                                        )
+                                            handleSignIn()
                                     }}
                                     className={`btn btn-primary text-white mt-4 ${
                                         isLoading && 'loading'
