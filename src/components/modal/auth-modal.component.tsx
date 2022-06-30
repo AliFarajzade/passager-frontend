@@ -59,17 +59,17 @@ const AuthModal: React.FC = () => {
     })()
 
     const [inputValues, setInputValues] = useState<TInputValues>({
-        confirmPassword: '',
-        email: '',
         name: '',
+        email: '',
         password: '',
+        confirmPassword: '',
     })
 
     const [inputErrors, setInputErrors] = useState<TInputErrors>({
-        confirmPassword: false,
-        password: false,
         email: false,
         name: false,
+        password: false,
+        confirmPassword: false,
     })
 
     const checkForValidation = (inputName: string, inputValue: string) => {
@@ -124,9 +124,9 @@ const AuthModal: React.FC = () => {
 
     const resetInputs = () => {
         setInputValues({
-            confirmPassword: '',
             email: '',
             name: '',
+            confirmPassword: '',
             password: '',
         })
         setInputErrors({
@@ -157,6 +157,11 @@ const AuthModal: React.FC = () => {
     }
 
     const handleSignUp = async () => {
+        Object.entries(inputValues).forEach(([key, value]) => {
+            if (!value)
+                setInputErrors(prevState => ({ ...prevState, [key]: true }))
+        })
+
         if (
             Object.values(inputErrors).some(value => value) ||
             Object.values(inputValues).some(value => !value)
@@ -186,6 +191,11 @@ const AuthModal: React.FC = () => {
     }
 
     const handleSignIn = async () => {
+        Object.entries(inputValues).forEach(([key, value]) => {
+            if (!value)
+                setInputErrors(prevState => ({ ...prevState, [key]: true }))
+        })
+
         if (
             Object.values(inputErrors).some(value => value) ||
             Object.values({
