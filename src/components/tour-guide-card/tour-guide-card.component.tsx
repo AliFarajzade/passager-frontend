@@ -18,8 +18,7 @@ const TourGuideCard: React.FC<IProps> = ({ tourGuide }) => {
                 <Image
                     width="100%"
                     height="100%"
-                    // TODO: Fix me
-                    src={`/images/guide-1.jpg`}
+                    src={tourGuide.photo}
                     alt={tourGuide.name}
                 />
             </div>
