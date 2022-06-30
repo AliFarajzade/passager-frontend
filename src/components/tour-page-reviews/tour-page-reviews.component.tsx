@@ -75,8 +75,6 @@ const TourPageReviews: React.FC<IProps> = ({ tourID }) => {
             },
         })
 
-        console.log(response)
-
         if (response?.data) {
             const newReview = {
                 ...response.data,

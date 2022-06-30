@@ -225,8 +225,6 @@ const AuthModal: React.FC = () => {
         return () => resetInputs()
     }, [])
 
-    console.log(signInError)
-
     return (
         <>
             <div className={authModalState.open ? 'modal modal-open' : 'modal'}>

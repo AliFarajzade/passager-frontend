@@ -17,8 +17,6 @@ interface IProps {
 }
 
 const TourCard: React.FC<IProps> = ({ tourData }) => {
-    const handleChangeRating = (newRating: number) => console.log(newRating)
-
     const router = useRouter()
 
     const naviagteToTourPage = useCallback(
@@ -55,7 +53,7 @@ const TourCard: React.FC<IProps> = ({ tourData }) => {
                     <div className="flex gap-2 items-center">
                         <ReactStars
                             count={5}
-                            onChange={handleChangeRating}
+                            onChange={() => {}}
                             size={25}
                             activeColor="#7ed56f"
                             value={tourData.averageRating}
