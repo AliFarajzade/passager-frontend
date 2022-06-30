@@ -284,6 +284,7 @@ const AuthModal: React.FC = () => {
                                             authModalState.view === 'signIn'
                                         )
                                             handleSignIn()
+                                        else handleOAuth()
                                     }}
                                     className={`btn btn-primary text-white mt-4 ${
                                         isLoading && 'loading'
