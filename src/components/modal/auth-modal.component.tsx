@@ -215,6 +215,12 @@ const AuthModal: React.FC = () => {
         }
     }
 
+    const handleOAuth = () => {
+        toast('Cooming soon...', {
+            icon: '👷',
+        })
+    }
+
     useEffect(() => {
         return () => resetInputs()
     }, [])
@@ -246,10 +252,11 @@ const AuthModal: React.FC = () => {
                             <>
                                 <button
                                     disabled={isLoading}
+                                    onClick={handleOAuth}
                                     className="btn border-none text-white bg-red-500 flex items-center"
                                 >
                                     <FaGoogle className="mr-2" size="15px" />
-                                    Sing{' '}
+                                    Sign{' '}
                                     {authModalState.view === 'signIn'
                                         ? 'In'
                                         : 'Up'}{' '}
