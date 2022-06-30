@@ -9,6 +9,7 @@ import PriceRange from '../../components/price-range/price-range.component'
 import RatingPicker from '../../components/rating-picker/rating-picker.component'
 import SearchCity from '../../components/search-city/search-city.component'
 import SelectDuration from '../../components/select-duration/select-duration.component'
+import SEO from '../../components/SEO/SEO.component'
 import SmallerScreenFilter from '../../components/small-screen-filter/small-screen-filter.component'
 import TourCard from '../../components/tour-card/tour-card.component'
 import TourPagePagination from '../../components/tour-page-pagination/tour-page-pagination.component'
@@ -47,39 +48,46 @@ const ToursPage: NextPage<IProps> = ({ response, error }) => {
 
     return (
         <>
-            <ToursPageSlider />
-            <SmallerScreenFilter />
-            <ToursPageLayout>
-                <section className="mb-5 rounded-md overflow-hidden bg-white pb-4">
-                    <DatePicker />
-                    <SearchCity />
-                    <PriceRange />
-                    <SelectDuration />
-                    <RatingPicker />
-                    <DifficultyPicker />
-                </section>
-                <>
-                    <section className="space-y-10 mb-8">
-                        {response && response.results !== 0 ? (
-                            response.data.map(tourObj => (
-                                <TourCard
-                                    key={tourObj._id}
-                                    tourData={tourObj}
-                                />
-                            ))
-                        ) : (
-                            <NotFoundTour />
-                        )}
+            <SEO
+                title="Explour Hottest Tours Available"
+                description="Tours Page"
+                image="/images/logo-gradient.png"
+            />
+            <>
+                <ToursPageSlider />
+                <SmallerScreenFilter />
+                <ToursPageLayout>
+                    <section className="mb-5 rounded-md overflow-hidden bg-white pb-4">
+                        <DatePicker />
+                        <SearchCity />
+                        <PriceRange />
+                        <SelectDuration />
+                        <RatingPicker />
+                        <DifficultyPicker />
                     </section>
-                    {!(error || !response || response.results === 0) && (
-                        <TourPagePagination
-                            page={page}
-                            setPage={setPage}
-                            total={response.total}
-                        />
-                    )}
-                </>
-            </ToursPageLayout>
+                    <>
+                        <section className="space-y-10 mb-8">
+                            {response && response.results !== 0 ? (
+                                response.data.map(tourObj => (
+                                    <TourCard
+                                        key={tourObj._id}
+                                        tourData={tourObj}
+                                    />
+                                ))
+                            ) : (
+                                <NotFoundTour />
+                            )}
+                        </section>
+                        {!(error || !response || response.results === 0) && (
+                            <TourPagePagination
+                                page={page}
+                                setPage={setPage}
+                                total={response.total}
+                            />
+                        )}
+                    </>
+                </ToursPageLayout>
+            </>
         </>
     )
 }

@@ -5,6 +5,7 @@ import MostPopularTours from '../components/home/most-popular-tours/most-popular
 import NewsLetter from '../components/home/news-letter/news-letter.component'
 import TourFeatures from '../components/home/tour-features/tour-features.component'
 import ToursInfo from '../components/home/tours-info/tours-info.component'
+import SEO from '../components/SEO/SEO.component'
 
 const guidesData = [
     {
@@ -42,18 +43,25 @@ const guidesData = [
 
 const Home: NextPage = () => {
     return (
-        <div className="lg:p-8 selection:bg-lightGreenAlpha selection:text-white">
-            <div className="bg-white">
-                <HomeHero />
-                <main>
-                    <ToursInfo />
-                    <TourFeatures />
-                    <MostPopularTours />
-                    <NewsLetter />
-                    <Guides guidesData={guidesData} />
-                </main>
+        <>
+            <SEO
+                title="Passager | Exciting Advantures Awaits!"
+                description="Home Page"
+                image="/images/logo-gradient.png"
+            />
+            <div className="lg:p-8 selection:bg-lightGreenAlpha selection:text-white">
+                <div className="bg-white">
+                    <HomeHero />
+                    <main>
+                        <ToursInfo />
+                        <TourFeatures />
+                        <MostPopularTours />
+                        <NewsLetter />
+                        <Guides guidesData={guidesData} />
+                    </main>
+                </div>
             </div>
-        </div>
+        </>
     )
 }
 
