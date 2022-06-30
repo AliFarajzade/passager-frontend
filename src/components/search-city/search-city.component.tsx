@@ -2,17 +2,26 @@ import { useRouter } from 'next/router'
 import { ChangeEvent, useState } from 'react'
 
 const SearchCity: React.FC = () => {
-    const [city, setCity] = useState<string | undefined>(undefined)
+    const [city, setCity] = useState<string>('')
 
     const router = useRouter()
 
     const handleChangeInput = (event: ChangeEvent<HTMLInputElement>) =>
         setCity(event.target.value.toLowerCase().trim())
 
-    const handleSearchCity = async () =>
-        router.push({
-            query: { ...router.query, city },
-        })
+    const handleSearchCity = async () => {
+        if (city)
+            router.push({
+                query: { ...router.query, city },
+            })
+        else {
+            const newQuery = { ...router.query }
+            delete newQuery.city
+            router.push({
+                query: { ...newQuery },
+            })
+        }
+    }
 
     return (
         <div className="p-4">
