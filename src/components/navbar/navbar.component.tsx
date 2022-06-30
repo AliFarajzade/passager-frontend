@@ -103,9 +103,6 @@ const Navbar = () => {
                             tabIndex={0}
                             className="dropdown-content menu p-2 shadow rounded-box w-52 bg-slate-100 dark:bg-white"
                         >
-                            <li>
-                                <label>My Tours</label>
-                            </li>
                             <li onClick={signOut}>
                                 <label>Sign out</label>
                             </li>
