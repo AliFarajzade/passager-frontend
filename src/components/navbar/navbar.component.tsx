@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
@@ -22,10 +23,20 @@ const Navbar = () => {
     return (
         <div className="bg-base-100 border-b-2 navbar">
             <div className="navbar-start">
-                {/* TODO: Add logo instead of text */}
-                <button className="btn btn-ghost normal-case text-xl">
-                    <Link href="/">Passager</Link>
-                </button>
+                <Link href="/" className="space-x-3">
+                    <button className="btn btn-ghost normal-case text-xl space-x-3">
+                        <Image
+                            src="/images/logo-gradient.png"
+                            alt=""
+                            width="45px"
+                            height="45px"
+                            objectFit="contain"
+                        />
+                        <span className="text-gradient hidden sm:inline-block">
+                            Passager
+                        </span>
+                    </button>
+                </Link>
             </div>
             <div className="navbar-center space-x-3 hidden lg:block">
                 {pathname === '/' && (
