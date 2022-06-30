@@ -32,6 +32,7 @@ const SearchCity: React.FC = () => {
                     type="text"
                     placeholder="Search…"
                     className="input input-bordered flex-1"
+                    value={city}
                 />
                 <button
                     onClick={handleSearchCity}
