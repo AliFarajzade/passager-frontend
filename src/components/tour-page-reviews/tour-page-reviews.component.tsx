@@ -2,11 +2,15 @@ import moment from 'moment'
 import ReactStars from 'react-rating-stars-component'
 
 import debounce from 'lodash.debounce'
-import { useEffect, useState } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
+import toast from 'react-hot-toast'
 import { BiCommentDetail } from 'react-icons/bi'
 import Skeleton from 'react-loading-skeleton'
+import { useSetRecoilState } from 'recoil'
 import axiosInstance from '../../helpers/axios-instance.helper'
+import useGetMe from '../../hooks/use-get-me.hook'
 import useRequest from '../../hooks/use-request.hook'
+import authModalStateAtom from '../../recoil/atoms/auth-modal.atom'
 import { THTTPResponse } from '../../types/http-response.types'
 import { TReview } from '../../types/review.types'
 import NoAvatar from '../no-avatar/no-avatar.component'
@@ -21,12 +25,71 @@ interface IProps {
 const TourPageReviews: React.FC<IProps> = ({ tourID }) => {
     const [page, setPage] = useState<number>(1)
     const [reviews, setReviews] = useState<TReview[]>([])
+    const [review, setReview] = useState<string>('')
+    const [rating, setRating] = useState<number>(5)
     const [total, setTotal] = useState<number | undefined>(undefined)
+    const setAuthModalState = useSetRecoilState(authModalStateAtom)
+    const [userState] = useGetMe()
 
-    const [, isLoading, error, doFetch] = useRequest<THTTPResponse<TReview[]>>()
+    const [, isFetchingReviews, errorFetchReviews, doFetch] =
+        useRequest<THTTPResponse<TReview[]>>()
+
+    const [, isPostingReview, errorPostingReview, doPost] =
+        useRequest<THTTPResponse<TReview>>()
 
     const handleChangePage = () => {
         setPage(prevState => prevState + 1)
+    }
+
+    const handleChangeReview = (event: ChangeEvent<HTMLTextAreaElement>) =>
+        setReview(event.target.value)
+
+    const handleChangeRating = (newRating: number) => setRating(newRating)
+
+    const handleReviewSubmit = async () => {
+        if (isPostingReview) return
+
+        if (!userState.user)
+            return setAuthModalState(prevState => ({
+                ...prevState,
+                open: true,
+                view: 'signIn',
+            }))
+
+        if (!review.trim()) return
+
+        const trimedReview = review.trim()
+
+        const response = await doPost({
+            axiosInstance,
+            url: `/tours/${tourID}/reviews`,
+            method: 'POST',
+            requestConfig: {
+                data: {
+                    review: trimedReview,
+                    rating,
+                },
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`,
+                },
+            },
+        })
+
+        console.log(response)
+
+        if (response?.data) {
+            const newReview = {
+                ...response.data,
+                user: userState.user,
+            }
+
+            setReviews(prevState => [newReview, ...prevState])
+            setReview('')
+            setRating(5)
+            toast.success('Review submitted successfully!')
+        } else {
+            toast.error('Cannot submit review')
+        }
     }
 
     useEffect(() => {
@@ -51,7 +114,7 @@ const TourPageReviews: React.FC<IProps> = ({ tourID }) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [page])
 
-    const isThereMoreComments = error
+    const isThereMoreComments = errorFetchReviews
         ? true
         : reviews.length
         ? total
@@ -69,24 +132,37 @@ const TourPageReviews: React.FC<IProps> = ({ tourID }) => {
                 Reviews
             </div>
             <div className="bg-white p-5">
-                {/* TODO: Check for auth */}
                 <div>
                     <div className="flex flex-col gap-6">
                         <h3 className="text-lg font-semibold">
                             Submit your review
                         </h3>
                         <textarea
+                            value={review}
+                            onChange={handleChangeReview}
                             className="textarea textarea-bordered w-full"
-                            placeholder="Bio"
+                            placeholder="Tell us what you think..."
                         ></textarea>
-                        <button className="btn btn-primary btn-outline max-w-max">
+                        <ReactStars
+                            count={5}
+                            onChange={handleChangeRating}
+                            size={25}
+                            activeColor="#7ed56f"
+                            value={5}
+                        />
+                        <button
+                            className={`btn btn-primary btn-outline max-w-max ${
+                                isPostingReview && 'loading'
+                            }`}
+                            onClick={handleReviewSubmit}
+                        >
                             Submit
                         </button>
                     </div>
                 </div>
                 <div className="divider"></div>
                 <div className="flex flex-col gap-12 mb-6">
-                    {isLoading ? (
+                    {isFetchingReviews ? (
                         <div className="w-full h-7">
                             <Skeleton />
                         </div>
@@ -125,7 +201,7 @@ const TourPageReviews: React.FC<IProps> = ({ tourID }) => {
                                             size={20}
                                             activeColor="#7ed56f"
                                             edit={false}
-                                            value={review.rating}
+                                            value={rating}
                                         />
                                     </div>
                                 </div>
