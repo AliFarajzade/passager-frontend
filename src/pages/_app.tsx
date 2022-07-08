@@ -5,6 +5,7 @@ import { useEffect } from 'react'
 import { Toaster } from 'react-hot-toast'
 import { RecoilRoot } from 'recoil'
 import Layout from '../components/layout/layout.component'
+import { printASCII } from '../helpers/print-ascii.helper'
 import '../styles/globals.scss'
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -15,6 +16,8 @@ function MyApp({ Component, pageProps }: AppProps) {
         Router.events.on('routeChangeStart', handleRouteStart)
         Router.events.on('routeChangeComplete', handleRouteDone)
         Router.events.on('routeChangeError', handleRouteDone)
+
+        printASCII()
 
         return () => {
             Router.events.off('routeChangeStart', handleRouteStart)
