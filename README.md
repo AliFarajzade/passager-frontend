@@ -6,6 +6,8 @@
 
 :star: Star me on GitHub — it motivates me a lot!
 
+> Here is the back-end repository: [Click here](https://github.com/AliFarajzade/passager-backend)
+
 [Passager](https://passager.vercel.app/) is THE professional, full-featured and
 high performance Tourism website!
 
@@ -27,6 +29,13 @@ high performance Tourism website!
 <br >
 
 ## How to set up:
+
+### Create a `.env.local` and add following variables:
+
+```
+NEXT_PUBLIC_MAPBOX_SECRET_KEY=YOUR MAPBOX TOKEN
+NEXT_PUBLIC_API_URL=API URL
+```
 
 ### To make local server, run:
 
