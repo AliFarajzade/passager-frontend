@@ -9,11 +9,11 @@ const NotFoundTour: React.FC = () => (
             width="600px"
             height="450px"
         />
-        <h1 className="font-bold text-2xl lg:text-4xl">
+        <h1 className="font-bold text-xl md:text-2xl lg:text-4xl">
             Sorry, We did not found any tour.
         </h1>
         <Link href="/tours">
-            <button className="btn btn-secondary font-semibold text-xl capitalize">
+            <button className="btn btn-secondary font-semibold text-sm md:text-xl capitalize">
                 explore other tours
             </button>
         </Link>

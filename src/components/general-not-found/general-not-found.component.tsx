@@ -20,10 +20,12 @@ const GeneralNotFound: React.FC<IProps> = ({
                 width="800px"
                 height="600px"
             />
-            <div className="-translate-y-16 text-center space-y-5">
-                <h1 className="text-4xl font-semibold">{message}</h1>
+            <div className="-translate-y-16 text-center space-y-5 pt-5">
+                <h1 className="text-xl sm:text-2xl md:text-4xl font-semibold">
+                    {message}
+                </h1>
                 <Link href={redirect}>
-                    <button className="btn btn-secondary font-semibold text-xl capitalize">
+                    <button className="btn btn-secondary font-semibold text-sm md:text-xl capitalize">
                         {btnMessage}
                     </button>
                 </Link>
