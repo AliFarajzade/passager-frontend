@@ -29,23 +29,25 @@ const slidersData = [
 
 const ToursPageSlider: React.FC = () => {
     return (
-        <Swiper
-            pagination={{
-                dynamicBullets: true,
-            }}
-            modules={[Pagination, Autoplay]}
-            autoplay={{
-                delay: 3000,
-                disableOnInteraction: false,
-            }}
-            className="h-[50vh]"
-        >
-            {slidersData.map(sliderData => (
-                <SwiperSlide key={sliderData.title}>
-                    <ToursPageSlide sliderData={sliderData} />
-                </SwiperSlide>
-            ))}
-        </Swiper>
+        <div className="px-5">
+            <Swiper
+                pagination={{
+                    dynamicBullets: true,
+                }}
+                modules={[Pagination, Autoplay]}
+                autoplay={{
+                    delay: 3000,
+                    disableOnInteraction: false,
+                }}
+                className="h-[50vh] rounded-bl-md rounded-br-md"
+            >
+                {slidersData.map(sliderData => (
+                    <SwiperSlide key={sliderData.title}>
+                        <ToursPageSlide sliderData={sliderData} />
+                    </SwiperSlide>
+                ))}
+            </Swiper>
+        </div>
     )
 }
 

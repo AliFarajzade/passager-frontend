@@ -54,7 +54,7 @@ html {
 
 @layer components {
     .gradient-title {
-        @apply uppercase text-center text-3xl md:text-4xl font-semibold tracking-wider bg-gradient-to-r from-lightGreen to-darkGreen bg-clip-text text-transparent hover:skew-y-2 hover:skew-x-12 hover:scale-110 transition-all text-shadow;
+        @apply uppercase text-center text-2xl md:text-4xl font-semibold tracking-wider bg-gradient-to-r from-lightGreen to-darkGreen bg-clip-text text-transparent hover:skew-y-2 hover:skew-x-12 hover:scale-110 transition-all text-shadow;
     }
 }
 
