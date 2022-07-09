@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
 
 const SearchCity: React.FC = () => {
     const [city, setCity] = useState<string>('')
@@ -22,6 +22,12 @@ const SearchCity: React.FC = () => {
             })
         }
     }
+
+    useEffect(() => {
+        if (router.query.city) setCity(router.query.city as string)
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     return (
         <div className="p-4">
