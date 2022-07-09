@@ -29,7 +29,7 @@ const slidersData = [
 
 const ToursPageSlider: React.FC = () => {
     return (
-        <div className="px-5">
+        <div className="px-5 pt-5">
             <Swiper
                 pagination={{
                     dynamicBullets: true,
@@ -39,7 +39,7 @@ const ToursPageSlider: React.FC = () => {
                     delay: 3000,
                     disableOnInteraction: false,
                 }}
-                className="h-[50vh] rounded-bl-md rounded-br-md"
+                className="h-[50vh] rounded-bl-md rounded-md"
             >
                 {slidersData.map(sliderData => (
                     <SwiperSlide key={sliderData.title}>
