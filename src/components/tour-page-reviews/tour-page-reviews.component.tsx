@@ -215,8 +215,10 @@ const TourPageReviews: React.FC<IProps> = ({ tourID }) => {
                 <div className="mx-auto text-center">
                     <button
                         onClick={handleChangePage}
-                        className="btn btn-primary w-[150px] rounded-full"
-                        disabled={isThereMoreComments}
+                        className={`btn btn-primary w-[150px] rounded-full ${
+                            isFetchingReviews && 'loading'
+                        }`}
+                        disabled={isThereMoreComments || isFetchingReviews}
                     >
                         {isThereMoreComments ? 'No more comments' : 'Load more'}
                     </button>
