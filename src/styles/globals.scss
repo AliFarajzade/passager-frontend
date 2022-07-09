@@ -18,6 +18,28 @@ $color-grey-light-2: #eee;
 $color-white: #fff;
 $color-black: #000;
 
+/* ===== Scrollbar CSS ===== */
+/* Firefox */
+* {
+    scrollbar-width: auto;
+    scrollbar-color: #2eff3c #f0f0f0;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+    width: 16px;
+}
+
+*::-webkit-scrollbar-track {
+    background: #f0f0f0;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #2eff3c;
+    border-radius: 22px;
+    border: 3px solid #ffffff;
+}
+
 html {
     scroll-behavior: smooth;
 }
