@@ -197,7 +197,10 @@ const AuthModal: React.FC = () => {
         })
 
         if (
-            Object.values(inputErrors).some(value => value) ||
+            Object.values({
+                email: inputErrors.email,
+                password: inputErrors.password,
+            }).some(value => value) ||
             Object.values({
                 email: inputValues.email,
                 password: inputValues.password,
