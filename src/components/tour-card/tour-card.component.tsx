@@ -65,36 +65,43 @@ const TourCard: React.FC<IProps> = ({ tourData }) => {
                         ...
                     </p>
                 </div>
-                <div className="grid grid-cols-2 gap-3 sm:gap-6 whitespace-nowrap">
+                <div className="grid grid-cols-2 gap-3 sm:gap-6 whitespace-nowrap justify-between w-full">
                     <div className="flex gap-2 flex-wrap">
                         <HiOutlineLocationMarker
                             size="1.5em"
                             className="text-lightGreenAlpha flex-shrink-0"
                         />
-                        <span>{tourData.startLocation.description}</span>
+                        <span className="whitespace-normal text-sm sm:text-base">
+                            {tourData.startLocation.description}
+                        </span>
                     </div>
                     <div className="flex gap-2">
                         <HiOutlineCalendar
                             size="1.5em"
-                            className="text-lightGreenAlpha"
+                            className="text-lightGreenAlpha flex-shrink-0"
                         />
-                        <span>
-                            {moment(tourData.startDate).format('MMMM Do')}
+                        <span className="whitespace-normal text-sm sm:text-base">
+                            {moment(tourData.startDate).format('MMM Do')}
                         </span>
                     </div>
                     <div className="flex gap-2">
                         <HiOutlineFlag
                             size="1.5em"
-                            className="text-lightGreenAlpha"
+                            className="text-lightGreenAlpha flex-shrink-0"
                         />
-                        <span>{tourData.locations.length} Stops</span>
+                        <span className="whitespace-normal text-sm sm:text-base">
+                            {' '}
+                            {tourData.locations.length} Stops
+                        </span>
                     </div>
                     <div className="flex gap-1">
                         <MdPersonOutline
                             size="1.5em"
-                            className="text-lightGreenAlpha"
+                            className="text-lightGreenAlpha flex-shrink-0"
                         />
-                        <span>{tourData.maxGroupSize} People</span>
+                        <span className="whitespace-normal text-sm sm:text-base">
+                            {tourData.maxGroupSize} People
+                        </span>
                     </div>
                 </div>
                 <button
