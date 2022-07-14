@@ -32,8 +32,8 @@ const Guides: React.FC<IProps> = ({ guidesData }) => {
                 navigation={true}
                 modules={[Navigation, Autoplay]}
                 autoplay={{
-                    delay: 2500,
-                    disableOnInteraction: false,
+                    delay: 7000,
+                    disableOnInteraction: true,
                 }}
                 className="mySwiper"
             >
