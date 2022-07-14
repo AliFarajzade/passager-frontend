@@ -37,7 +37,7 @@ const guidesData = [
         name: 'Felix Kipkemei',
         photo: '/images/guide-4.jpg',
         description:
-            'Snowboarder, mountain lover, and a true adventure lover. He climbs the highest mountains in the world and loves to go on adventures.',
+            'Snowboarder, mountain lover, and a true adventure lover. He climbs the highest mountains in the world.',
     },
 ]
 
