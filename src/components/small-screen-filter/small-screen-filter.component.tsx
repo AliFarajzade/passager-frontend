@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { BiSave } from 'react-icons/bi'
 import { FiFilter } from 'react-icons/fi'
+import ClearFilter from '../clear-filter/clear-filter.component'
 import DatePicker from '../date-picker/date-picker.component'
 import DifficultyPicker from '../difficulty-picker/difficulty-picker.component'
 import PriceRange from '../price-range/price-range.component'
@@ -37,14 +38,16 @@ const SmallerScreenFilter: React.FC = () => {
                         <RatingPicker />
                         <DifficultyPicker />
                     </div>
-                    <div className="fixed bg-slate-200 border-2 border-gray-200 bottom-0 left-0 right-0 h-20 p-2 flex justify-center items-center">
+                    <div className="fixed bg-slate-200 border-2 border-gray-200 bottom-0 left-0 right-0 h-20 p-2 flex justify-between items-center gap-2">
                         <button
-                            className="btn btn-primary w-full flex items-center gap-2 text-base font-semibold text-white"
+                            className="btn btn-primary flex-1 flex items-center gap-2 text-base font-semibold text-white"
                             onClick={() => toggleFilterMenuVisibility(false)}
                         >
                             <BiSave size="1.5em" />
                             <span className="capitalize">Apply</span>
                         </button>
+
+                        <ClearFilter className="flex-1 rounded-lg" />
                     </div>
                 </div>
             )}

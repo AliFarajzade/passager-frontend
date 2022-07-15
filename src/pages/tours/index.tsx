@@ -1,6 +1,7 @@
 import type { GetServerSideProps, NextPage } from 'next'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
+import ClearFilter from '../../components/clear-filter/clear-filter.component'
 import DatePicker from '../../components/date-picker/date-picker.component'
 import DifficultyPicker from '../../components/difficulty-picker/difficulty-picker.component'
 import ToursPageLayout from '../../components/layout/tours-page-layout.component'
@@ -58,6 +59,7 @@ const ToursPage: NextPage<IProps> = ({ response, error }) => {
                 <SmallerScreenFilter />
                 <ToursPageLayout>
                     <section className="mb-5 rounded-md overflow-hidden bg-white pb-4">
+                        <ClearFilter className="rounded-none btn-block" />
                         <DatePicker />
                         <SearchCity />
                         <PriceRange />
