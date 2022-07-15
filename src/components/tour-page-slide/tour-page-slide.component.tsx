@@ -5,7 +5,7 @@ interface IProps {
 const TourPageSlide: React.FC<IProps> = ({ tourImage }) => {
     return (
         <div
-            style={{ backgroundImage: `url(/${tourImage})` }}
+            style={{ backgroundImage: `url(${tourImage})` }}
             className="bg-no-repeat bg-center bg-cover w-full h-full"
         ></div>
     )
