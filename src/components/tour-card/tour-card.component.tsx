@@ -31,7 +31,7 @@ const TourCard: React.FC<IProps> = ({ tourData }) => {
                 className="bg-cover bg-no-repeat bg-center w-full h-[288px] md:h-full transition-transform rounded-md shadow-lg  hover:scale-105 cursor-pointer"
                 style={{ backgroundImage: `url(${tourData.coverImage})` }}
             ></div>
-            <div className="px-4 py-6 space-y-6  md:pl-6 md:py-2">
+            <div className="px-0 sm:px-4 py-6 space-y-6  md:pl-6 md:py-2">
                 <div className="space-y-2">
                     <div className="uppercase flex flex-col gap-4">
                         <h1
@@ -66,7 +66,7 @@ const TourCard: React.FC<IProps> = ({ tourData }) => {
                     </p>
                 </div>
                 <div className="grid grid-cols-2 gap-3 sm:gap-6 whitespace-nowrap justify-between w-full">
-                    <div className="flex gap-2 flex-wrap">
+                    <div className="flex items-center gap-2 flex-wrap">
                         <HiOutlineLocationMarker
                             size="1.5em"
                             className="text-lightGreenAlpha flex-shrink-0"
@@ -75,7 +75,7 @@ const TourCard: React.FC<IProps> = ({ tourData }) => {
                             {tourData.startLocation.description}
                         </span>
                     </div>
-                    <div className="flex gap-2">
+                    <div className="flex gap-2 items-center flex-wrap">
                         <HiOutlineCalendar
                             size="1.5em"
                             className="text-lightGreenAlpha flex-shrink-0"
@@ -84,7 +84,7 @@ const TourCard: React.FC<IProps> = ({ tourData }) => {
                             {moment(tourData.startDate).format('MMM Do')}
                         </span>
                     </div>
-                    <div className="flex gap-2">
+                    <div className="flex gap-2 items-center flex-wrap">
                         <HiOutlineFlag
                             size="1.5em"
                             className="text-lightGreenAlpha flex-shrink-0"
@@ -94,7 +94,7 @@ const TourCard: React.FC<IProps> = ({ tourData }) => {
                             {tourData.locations.length} Stops
                         </span>
                     </div>
-                    <div className="flex gap-1">
+                    <div className="flex gap-1 items-center flex-wrap">
                         <MdPersonOutline
                             size="1.5em"
                             className="text-lightGreenAlpha flex-shrink-0"
