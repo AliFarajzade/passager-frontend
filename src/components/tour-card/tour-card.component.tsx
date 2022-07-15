@@ -55,6 +55,7 @@ const TourCard: React.FC<IProps> = ({ tourData }) => {
                             count={5}
                             onChange={() => {}}
                             size={25}
+                            edit={false}
                             activeColor="#7ed56f"
                             value={tourData.averageRating}
                         />
