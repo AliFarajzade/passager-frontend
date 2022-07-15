@@ -9,6 +9,8 @@ import {
 } from 'react'
 import { Range } from 'react-date-range'
 import { AiOutlineCalendar } from 'react-icons/ai'
+import { BsArrowRight } from 'react-icons/bs'
+import { nextMonth } from '../../helpers/nearest-date.helper'
 
 interface IProps {
     setDatePickerVisibility: Dispatch<SetStateAction<boolean>>
@@ -49,10 +51,17 @@ const QuickSearch: React.FC<IProps> = ({ setDatePickerVisibility, date }) => {
             />
             <button
                 onClick={handleChangeCalenderVisibility}
-                className="btn btn-outline flex items-center gap-3 flex-grow bg-white border-2 border-gray-300 text-gray-500 shrink whitespace-nowrap"
+                className="btn btn-outline flex items-center gap-2 flex-grow bg-white border-2 border-gray-300 text-gray-500 shrink whitespace-nowrap"
             >
                 <AiOutlineCalendar size="1.5em" />
-                {moment(new Date()).format('MMMM DD')}
+                <p className="hidden sm:inline">Today</p>
+                <BsArrowRight className="hidden sm:inline" />
+                <p className="hidden sm:inline">
+                    {moment(nextMonth()).format('MMMM DD')}
+                </p>
+                <p className="inline sm:hidden">
+                    {moment(nextMonth()).format('MMM DD')}
+                </p>
             </button>
             <button
                 className="btn btn-square btn-primary text-white"
