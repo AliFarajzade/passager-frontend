@@ -35,7 +35,7 @@ export default function Document() {
                 />
                 <meta name="theme-color" content="#ffffff" />
             </Head>
-            <body className="bg-slate-100">
+            <body className="bg-slate-100 selection:bg-lightGreen selection:text-white">
                 <Main />
                 <NextScript />
             </body>
