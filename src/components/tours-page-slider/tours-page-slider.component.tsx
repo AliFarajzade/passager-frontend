@@ -36,8 +36,8 @@ const ToursPageSlider: React.FC = () => {
                 }}
                 modules={[Pagination, Autoplay]}
                 autoplay={{
-                    delay: 3000,
-                    disableOnInteraction: false,
+                    delay: 8000,
+                    disableOnInteraction: true,
                 }}
                 className="h-[50vh] rounded-bl-md rounded-md"
             >
