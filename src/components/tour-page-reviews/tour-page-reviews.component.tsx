@@ -16,7 +16,7 @@ import { TReview } from '../../types/review.types'
 import NoAvatar from '../no-avatar/no-avatar.component'
 import UserAvatar from '../user-avatar/user-avatar.component'
 
-const LIMIT = 1
+const LIMIT = 5
 
 interface IProps {
     tourID: number
