@@ -33,7 +33,9 @@ const HomeHero = () => {
                 />
             </header>
             {datePickerVisibility && (
-                <HomeHeroCalender date={date} setDate={setDate} />
+                <div className="absolute z-50 top-[60.7%] sm:top-[62.7%] left-1/2 -translate-x-1/2 sm:left-[48.5%] sm:translate-x-0">
+                    <HomeHeroCalender date={date} setDate={setDate} />
+                </div>
             )}
         </div>
     )
