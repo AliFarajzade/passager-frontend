@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { BsArrowRight } from 'react-icons/bs'
 import TourInfoCard from '../tour-info-card/tour-info-card.component'
 
 const cards = [
@@ -51,8 +52,8 @@ const ToursInfo = () => {
                     <Link href="/tours">
                         <button className="btn btn-ghost text-lightGreen hover:bg-lightGreenAlpha hover:text-white flex items-cetner gap-2">
                             Explore Tours{' '}
-                            <span className="text-xl -translate-y-[3px]">
-                                →
+                            <span className="text-xl">
+                                <BsArrowRight />
                             </span>
                         </button>
                     </Link>
